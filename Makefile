@@ -37,7 +37,7 @@ FFTWLIBN  = $(FFTWLIB) -lfftw3 -lfftw3_threads
 OBJ = ./Objs/
 EXE = ./bin/
 INC = ./inc/
-INCEXT = $(INC)Angpow/
+INCEXT = $(INC)3CInt/
 SRC = ./src/
 LIB = ./lib/
 
@@ -52,10 +52,10 @@ LDFLAGS   += $(FFTWLIBN) -lm
 
 #  Define our target list
 .PHONY: default
-default: makedir lib angpow angcor 
+default: makedir lib 3cint
 
 .PHONY: all 
-all : makedir lib angpow
+all : makedir lib 3cint
 
 .PHONY: tidy
 tidy : 
@@ -77,66 +77,23 @@ CXXOBJ = $(OBJ)walltimer.o \
 	$(OBJ)walltime_c.o \
 	$(OBJ)angpow_bessel.o \
 	$(OBJ)angpow_chebyshevInt.o \
-	$(OBJ)angpow_radint.o \
-	$(OBJ)angpow_kinteg.o \
-	$(OBJ)angpow_pk2cl.o \
-	$(OBJ)angpow_tools.o \
-	$(OBJ)angpow_clbase.o \
-	$(OBJ)angpow_powspec.o \
-	$(OBJ)angpow_parameters.o \
-	$(OBJ)angpow_cosmo.o \
-	$(OBJ)angpow_ctheta.o \
-	$(OBJ)angpow_growth.o
 
 
 CXXSHOBJ = walltimer.o \
 	walltime_c.o \
 	angpow_bessel.o \
-	angpow_chebyshevInt.o \
-	angpow_radint.o \
-	angpow_kinteg.o \
-	angpow_pk2cl.o \
-	angpow_tools.o \
-	angpow_clbase.o \
-	angpow_powspec.o \
-	angpow_parameters.o \
-	angpow_cosmo.o \
-	angpow_ctheta.o \
-	angpow_growth.o
-
+	angpow_chebyshevInt.o
 
 #C++ common Headers
 CXXHDR =  $(INCEXT)walltimer.h \
 	$(INCEXT)walltime_c.h \
-	$(INCEXT)angpow_quadinteg.h \
 	$(INCEXT)angpow_numbers.h \
 	$(INCEXT)angpow_exceptions.h \
 	$(INCEXT)angpow_func.h  \
 	$(INCEXT)angpow_bessel.h \
 	$(INCEXT)angpow_fft.h \
 	$(INCEXT)angpow_chebyshevInt.h\
-	$(INCEXT)angpow_integrand_base.h \
-	$(INCEXT)angpow_integrand.h \
-	$(INCEXT)angpow_powspec_base.h \
-	$(INCEXT)angpow_powspec.h \
-	$(INCEXT)angpow_radial.h \
-	$(INCEXT)angpow_radial_base.h \
-	$(INCEXT)angpow_radint.h \
-	$(INCEXT)angpow_kinteg.h \
-	$(INCEXT)angpow_utils.h \
-	$(INCEXT)angpow_cosmo_base.h \
-	$(INCEXT)angpow_cosmo.h \
-	$(INCEXT)angpow_pk2cl.h \
-	$(INCEXT)angpow_tools.h \
-	$(INCEXT)angpow_parameters.h \
-	$(INCEXT)angpow_clbase.h \
-	$(INCEXT)angpow_ctheta.h \
-	$(INCEXT)angpow_limber.h \
-	$(INCEXT)angpow_growth_base.h \
-	$(INCEXT)angpow_growth.h \
-	$(INCEXT)angpow_bias_base.h \
-	$(INCEXT)angpow_bias.h 
-
+	$(INCEXT)angpow_utils.h
 
 #C++ rule for compiling
 $(OBJ)%.o: $(SRC)%.cc $(CXXHDR)
@@ -148,67 +105,30 @@ $(OBJ)%.o: $(SRC)%.cc $(CXXHDR)
 sharelib : $(CXXOBJ)
 	echo "make shared library..."
 	cd $(OBJ); \
-	$(CMDSHLCXX) -o ../$(LIB)libangpow.$(SLEXT) $(CXXSHOBJ) $(LDFLAGS)
+	$(CMDSHLCXX) -o ../$(LIB)lib3cint.$(SLEXT) $(CXXSHOBJ) $(LDFLAGS)
 
 .PHONY: lib
-lib : $(LIB)libangpow.a
+lib : $(LIB)lib3cint.a
 
-$(LIB)libangpow.a : $(CXXOBJ)
+$(LIB)lib3cint.a : $(CXXOBJ)
 	$(AR) $(ARFLAGS) $@ $^
 
 ###############
-.PHONY:  angpow
-angpow: $(EXE)angpow
-	echo '---- angpow made'
+.PHONY:  3cint
+3cint: $(EXE)3cint
+	echo '---- 3cint made'
 
-$(OBJ)angpow.o: angpow.cc $(CXXHDR)
+$(OBJ)3cint.o: 3cint.cc $(CXXHDR)
 	echo "compile... $@"
 	$(CXXCOMPILE)  -I$(INC) -c $< -o $@ 
 
-$(EXE)angpow :  $(OBJ)angpow.o $(LIB)libangpow.a
+$(EXE)3cint :  $(OBJ)3cint.o $(LIB)lib3cint.a
 	echo "Link..."
-	$(CXXLINK) -o $@ $(OBJ)angpow.o -L$(LIB) -langpow  $(LDFLAGS)
-
-
-###############
-#.PHONY:  algotest
-#algotest: $(EXE)algotest
-#	echo '---- algotest made'
-
-#$(OBJ)algotest.o: algotest.cc $(CXXHDR)
-#	echo "compile... $@"
-#	$(CXXCOMPILE)  -I$(INC) -c $< -o $@ 
-
-#$(EXE)algotest :  $(OBJ)algotest.o $(LIB)libangpow.a
-#	echo "Link..."
-#	$(CXXLINK) -o $@ $(OBJ)algotest.o -L$(LIB) -langpow  $(LDFLAGS)
+	$(CXXLINK) -o $@ $(OBJ)3cint.o -L$(LIB) -l3cint  $(LDFLAGS)
 
 
 
-###############
-.PHONY:  angcor
-angcor: $(EXE)angcor
-	echo '---- angcor made'
 
-$(OBJ)angcor.o: angcor.cc $(CXXHDR)
-	echo "compile... $@"
-	$(CXXCOMPILE)  -I$(INC) -c $< -o $@ 
-
-$(EXE)angcor :  $(OBJ)angcor.o $(LIB)libangpow.a
-	echo "Link..."
-	$(CXXLINK) -o $@ $(OBJ)angcor.o -L$(LIB) -langpow  $(LDFLAGS)
-
-###############
-.PHONY: debug
-debug:
-	echo "Test with bench1 init file"
-	$(EXE)angpow angpow_bench1.ini
-
-###############
-.PHONY: fullcheck
-fullcheck:
-	echo "Test with the whole set of init files"
-	./verif.sh
 
 
 

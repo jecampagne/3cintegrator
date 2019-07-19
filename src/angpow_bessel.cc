@@ -1,6 +1,6 @@
-#include "Angpow/angpow_bessel.h"
-#include "Angpow/angpow_exceptions.h"
-#include "Angpow/angpow_parameters.h"
+#include "3CInt/angpow_bessel.h"
+#include "3CInt/angpow_exceptions.h"
+//#include "3CInt/angpow_parameters.h"
 #include <boost/exception/diagnostic_information.hpp> 
 #include <boost/exception_ptr.hpp> 
 #include <boost/math/policies/policy.hpp> //test

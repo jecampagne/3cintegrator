@@ -25,6 +25,8 @@
  *    co-authors: J. Neveu, S. Plaszczynski
  */
 
+#include <vector>
+
 namespace Angpow {
 
 

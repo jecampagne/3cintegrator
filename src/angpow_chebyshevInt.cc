@@ -1,9 +1,9 @@
-#include "Angpow/angpow_chebyshevInt.h"
+#include "3CInt/angpow_chebyshevInt.h"
 #include <iostream>
 #include <sstream>
 
 #ifdef PROFILING
-#include "Angpow/walltimer.h" //profiling 
+#include "3CInt/walltimer.h" //profiling 
 #endif
 
 namespace Angpow {

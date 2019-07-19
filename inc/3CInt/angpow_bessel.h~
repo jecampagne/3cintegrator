@@ -41,8 +41,8 @@
 #include <iterator>
 #include <math.h>
 #include <algorithm>
-//Boost
-#include "boost/math/special_functions/bessel.hpp"
+
+
 
 
 #include "angpow_numbers.h"
@@ -52,19 +52,25 @@
 #define _GAMMA1_ 2.6789385347077476336556
 #define _GAMMA2_ 1.3541179394264004169452
 
-
-namespace Angpow {
-
-
-
 /*
 POLICY = 2 => CLASSgal bessel_j function
        = 1 => BOOST + policy reduite
        = 0 => BOOST call avec r_4 arguments
 */
-
-
 #define POLICY 2
+
+#if POLICY < 2
+//Boost
+#include "boost/math/special_functions/bessel.hpp"
+#endif
+
+
+namespace Angpow {
+
+
+
+
+
 
 class BesselRoot {
    public:

@@ -36,6 +36,7 @@
 
 //STD
 #include <iostream>
+#include <sstream>
 #include <fstream>
 #include <vector>
 #include <iterator>
@@ -59,10 +60,10 @@ POLICY = 2 => CLASSgal bessel_j function
 */
 #define POLICY 2
 
-#if POLICY < 2
-//Boost
+
+//Boost: see how to cut this dependancy (see zeros computation)
 #include "boost/math/special_functions/bessel.hpp"
-#endif
+
 
 
 namespace Angpow {
