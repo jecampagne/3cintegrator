@@ -110,22 +110,29 @@ void test0() {
   // Chebyshev machinery 
   int iOrd1 = para.chebyshev_order_1;
   int iOrd2 = para.chebyshev_order_2;
-
-  ChebyshevIntBase* cheInt = 0;
-  if (iOrd1 == iOrd2) {
-    cheInt = new ChebyshevIntSym(iOrd1);
-  } else {
-    cheInt = new ChebyshevIntNonSym(iOrd1, iOrd2);
-  }
+  ChebyshevIntBase* cheInt =  new ChebyshevIntNonSym(iOrd1, iOrd2);
 
 
   //Function to be integrated
-  ProdJBess* func = new ProdJBess(jlPtr,Lmax,R[0],para.R[1]);
-
+  JBess1* f1 = new JBess1(jlPtr,ell,R[0]);
+  JBess1* f2 = new JBess1(jlPtr,ell,R[1]);
 
 
   //Integration
   for(int p = 1; p<maxRoots; p++){ //init at p=1
+
+    r_8 lowBound = klp[p-1];
+    r_8 uppBound = klp[p];
+    
+    if(lowBound > uppBound)
+      throw AngpowError("KIntegrator::Compute uppBound < lowBound Fatal");
+    
+    std::vector<r_8> ChebTrans1;
+    cheInt->ChebyshevTransform(f1,0,ChebTrans1,lowBound,uppBound);
+    std::vector<r_8> ChebTrans2;
+    cheInt->ChebyshevTransform(f2,0,ChebTrans2,lowBound,uppBound);
+    
+
   }//p-loop 
 
 
