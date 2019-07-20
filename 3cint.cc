@@ -26,20 +26,6 @@ struct PARAM {
   int n_bessel_roots_per_interval;
 } para ;
 
-class FuncType2: public ClassFunc1D {
-
-public:
-  FuncType2(BesselJImp* jl, int ell, r_8 R) {
-    jl_ = new JBess1(jl,ell,R);
-  }
-  inline virtual r_8 operator()(r_8 x) const {
-    return (*jl_)(x) * 1000. * sqrt(x) * exp(-x*3.0);
-  }
-  virtual ~FuncType2() {}
-private:
-  JBess1* jl_;      //owner
-
-};
 
 class FuncType1: public ClassFunc1D {
 
@@ -54,6 +40,8 @@ private:
   r_8 R_; 
 
 };//ProdJBess
+
+
 
 
 
@@ -147,6 +135,9 @@ void test0() {
   //Integration
   r_8 integral = 0.;
   //Split the [kmin, kmax] intervalle into sub-intervales
+  r_8 kmin =  klp[0];
+  r_8 kmax = klp[maxRoots-1];
+
   for(int p = 1; p<maxRoots; p++){ //init at p=1
 
     //get the bounds
@@ -170,7 +161,18 @@ void test0() {
       cheInt->ComputeIntegral(ChebTrans1,ChebTrans2,lowBound,uppBound);
   }//p-loop 
 
-  std::cout << "Integ = " << integral << std::endl;
+  std::cout << "Approx. Integ = " << integral << std::endl;
+
+  //truth
+  r_8 true_int = 0.;
+  if(R[0] != R[1]){
+    r_8 Rdiff = R[0]-R[1];
+    r_8 Rsum  = R[0]+R[1];
+    true_int = (Rdiff*(cos(ell*M_PI-kmin*Rsum) - cos(ell*M_PI-kmax*Rsum)) 
+		- Rsum*( sin(kmin*Rdiff)-sin(kmax*Rdiff)) )/(2.*Rdiff*Rsum);
+  }
+  std::cout << "True Integ = " << true_int << std::endl;
+
 
 
   //-------
