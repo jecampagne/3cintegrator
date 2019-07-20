@@ -26,28 +26,40 @@ struct PARAM {
   int n_bessel_roots_per_interval;
 } para ;
 
-class ProdJBess: public ClassFunc1D {
+class FuncType2: public ClassFunc1D {
 
 public:
-  ProdJBess(BesselJImp* jl, int el, r_8 R1, r_8 R2):jl_(jl) {
-    j1_ = new JBess1(jl,el,R1);
-    j2_ = new JBess1(jl,el,R2);    
+  FuncType2(BesselJImp* jl, int ell, r_8 R) {
+    jl_ = new JBess1(jl,ell,R);
   }
   inline virtual r_8 operator()(r_8 x) const {
-    return (*j1_)(x) * (*j2_)(x);
+    return (*jl_)(x) * 1000. * sqrt(x) * exp(-x*3.0);
   }
-  virtual ~ProdJBess() {}
+  virtual ~FuncType2() {}
 private:
-  BesselJImp* jl_; //not owner
-  JBess1* j1_;      //owner
-  JBess1* j2_;      //owner
+  JBess1* jl_;      //owner
+
+};
+
+class FuncType1: public ClassFunc1D {
+
+public:
+  FuncType1(int ell, r_8 R): ell_(ell), R_(R) {}
+  inline virtual r_8 operator()(r_8 x) const {
+    return cos(x*R_ -ell_*M_PI*0.5 - M_PI*0.25);
+  }
+  virtual ~FuncType1() {}
+private:
+  int ell_;
+  r_8 R_; 
 
 };//ProdJBess
 
 
+
 void test0() {
-  r_8 kmax = para.kmax;
-  int ell = para.Lmax; //ell<Lmax
+  r_8 kMax = para.kmax;
+  int Lmax = para.Lmax; //ell<Lmax
   int nRootPerInt = para.n_bessel_roots_per_interval;
 
 
@@ -73,67 +85,92 @@ void test0() {
   r_8 Rcur = std::accumulate(R.begin(), R.end(), 0.)/((r_8)R.size());
 
   r_8 kscale = 1./Rcur;
-  int Pmaxmax = (kmax*Rcur)/M_PI;
+  int Pmaxmax = (kMax*Rcur)/M_PI;
 
-  BesselRoot broots(ell,Pmaxmax,nRootPerInt);
+  BesselRoot broots(Lmax,Pmaxmax,nRootPerInt);
   int NbessRoots = broots.NRootsL(); //last bessel root is NbessRoots*nRootPerInt_
     
   int maxRoots = NbessRoots;
   
+  //Start here for a specific ell
+  int ell = 20;
+  std::cout << "ell = " << ell << std::endl;
+
+  //Function to be integrated
+  FuncType1* f1 = new FuncType1(ell,R[0]);
+  FuncType1* f2 = new FuncType1(ell,R[1]);
+
   std::vector<r_8> qlp; broots.GetVecRoots(qlp, ell);	
-  
+
+
   //get the last value = kMax
   
   r_8 kLast = qlp.back()*kscale;
+  std::cout << "(1) kLast= " << kLast << std::endl;
   while(kLast>kMax && !qlp.empty()){
     qlp.pop_back();
     kLast = qlp.back()/Rcur;
   }
-  if(kLast<kMax_){
-    qlp.push_back(Rcur*kMax_);
+  if(kLast<kMax){
+    qlp.push_back(Rcur*kMax);
   }
   kLast = qlp.back()*kscale;
+  std::cout << "(2) kLast= " << kLast << std::endl;
   
   //final k-integral bounds
   std::vector<r_8> klp;
-  klp.push_back(jlPtr->Xmin(l));
+  klp.push_back(jlPtr->Xmin(ell));
   klp.insert(klp.end(),qlp.begin(),qlp.end());
   std::transform(klp.begin(),klp.end(),klp.begin(),std::bind1st(std::multiplies<r_8>(),kscale));
+
+
+  std::cout << "Dump klp values:\n";
+  for(int i=0;i<klp.size();i++){
+    std::cout << klp[i] << " "; 
+  }
+  std::cout << std::endl;
+
   
   maxRoots = klp.size();
   
-  printf("[%d]: ell=%d, RcurMax=%f, Nintervales=%d, Nradius=%d\n",
-	 ell,RcurMax,maxRoots,nbreOfRadius);
+  printf("ell=%d, Rcur=%f, Nintervales=%d, Nradius=%d\n",
+	 ell,Rcur,maxRoots-1,nbreOfRadius);
 
 
 
   // Chebyshev machinery 
   int iOrd1 = para.chebyshev_order_1;
   int iOrd2 = para.chebyshev_order_2;
-  ChebyshevIntBase* cheInt =  new ChebyshevIntNonSym(iOrd1, iOrd2);
-
-
-  //Function to be integrated
-  JBess1* f1 = new JBess1(jlPtr,ell,R[0]);
-  JBess1* f2 = new JBess1(jlPtr,ell,R[1]);
+  ChebyshevIntNonSym* cheInt =  new ChebyshevIntNonSym(iOrd1, iOrd2);
 
 
   //Integration
+  r_8 integral = 0.;
+  //Split the [kmin, kmax] intervalle into sub-intervales
   for(int p = 1; p<maxRoots; p++){ //init at p=1
 
+    //get the bounds
     r_8 lowBound = klp[p-1];
     r_8 uppBound = klp[p];
+
+    std::cout << "current interval: [" << lowBound << ", " << uppBound << "]" 
+	      << std::endl;
     
     if(lowBound > uppBound)
       throw AngpowError("KIntegrator::Compute uppBound < lowBound Fatal");
     
+    //get the Chebyshev coeffs in the final space for each fonctions
     std::vector<r_8> ChebTrans1;
     cheInt->ChebyshevTransform(f1,0,ChebTrans1,lowBound,uppBound);
     std::vector<r_8> ChebTrans2;
     cheInt->ChebyshevTransform(f2,0,ChebTrans2,lowBound,uppBound);
     
-
+    //compute local integral
+    integral += 
+      cheInt->ComputeIntegral(ChebTrans1,ChebTrans2,lowBound,uppBound);
   }//p-loop 
+
+  std::cout << "Integ = " << integral << std::endl;
 
 
   //-------
@@ -145,7 +182,9 @@ void test0() {
   // Che
   delete cheInt;
   // func
-  delete func;
+  delete f1;
+  delete f2;
+
     
 
   std::cout << "End test0......" << std::endl;
