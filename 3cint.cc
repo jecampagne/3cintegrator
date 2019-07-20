@@ -3,10 +3,8 @@
 #include <iostream>
 
 #include "3CInt/angpow_exceptions.h"
-//#include "3CInt/angpow_utils.h" //getMemorySize
 #include "3CInt/angpow_numbers.h"
 #include "3CInt/angpow_func.h"
-#include "3CInt/angpow_bessel.h"
 #include "3CInt/angpow_tools.h"
 #include "3CInt/angpow_chebyshevInt.h"
 #include "3CInt/walltimer.h"
@@ -18,12 +16,13 @@ struct PARAM {
   int Lmax_for_xmin;
   r_8 jl_xmin_cut;
   int Lmax;
-  r_8 kmax;
+  r_8 kMin;
+  r_8 kMax;
   r_8 R1;
   r_8 R2;
   int chebyshev_order_1;
   int chebyshev_order_2;
-  int n_bessel_roots_per_interval;
+  int n_sub_intervals;
 } para ;
 
 
@@ -46,24 +45,12 @@ private:
 
 
 void test0() {
+  r_8 kMin = para.kmin;
   r_8 kMax = para.kmax;
   int Lmax = para.Lmax; //ell<Lmax
-  int nRootPerInt = para.n_bessel_roots_per_interval;
+  int nSubInterv = para.n_sub_intervals;
 
 
-  r_8 jl_xmin_cut   = para.jl_xmin_cut;
-  int Lmax_for_xmin = para.Lmax_for_xmin;  
-  if(Lmax_for_xmin<Lmax){
-    printf("ProcessTest0: Warning: auto-reset Lmax_for_xmin > Lmax\n");
-    Lmax_for_xmin = Lmax+1;
-  }
-  //Initialize some stuff for the bessel functions
-  BesselJInit* jliniPtr = new BesselJInit(Lmax_for_xmin, jl_xmin_cut);
-  BesselJImp*  jlPtr    = new BesselJImp(jliniPtr);
-
-
-
-  //Bessel roots 
   std::vector<r_8> R(2);
   R[0] = para.R1;
   R[1] = para.R2;
@@ -73,12 +60,7 @@ void test0() {
   r_8 Rcur = std::accumulate(R.begin(), R.end(), 0.)/((r_8)R.size());
 
   r_8 kscale = 1./Rcur;
-  int Pmaxmax = (kMax*Rcur)/M_PI;
 
-  BesselRoot broots(Lmax,Pmaxmax,nRootPerInt);
-  int NbessRoots = broots.NRootsL(); //last bessel root is NbessRoots*nRootPerInt_
-    
-  int maxRoots = NbessRoots;
   
   //Start here for a specific ell
   int ell = 20;
@@ -88,28 +70,12 @@ void test0() {
   FuncType1* f1 = new FuncType1(ell,R[0]);
   FuncType1* f2 = new FuncType1(ell,R[1]);
 
-  std::vector<r_8> qlp; broots.GetVecRoots(qlp, ell);	
-
-
-  //get the last value = kMax
-  
-  r_8 kLast = qlp.back()*kscale;
-  std::cout << "(1) kLast= " << kLast << std::endl;
-  while(kLast>kMax && !qlp.empty()){
-    qlp.pop_back();
-    kLast = qlp.back()/Rcur;
-  }
-  if(kLast<kMax){
-    qlp.push_back(Rcur*kMax);
-  }
-  kLast = qlp.back()*kscale;
-  std::cout << "(2) kLast= " << kLast << std::endl;
-  
   //final k-integral bounds
-  std::vector<r_8> klp;
-  klp.push_back(jlPtr->Xmin(ell));
-  klp.insert(klp.end(),qlp.begin(),qlp.end());
-  std::transform(klp.begin(),klp.end(),klp.begin(),std::bind1st(std::multiplies<r_8>(),kscale));
+  std::vector<r_8> klp(nSubInterv);
+  r_8 dK = kMax-kMin;
+  for(int i=0; i<=nSubInterv; i++){
+    klp[i] = kMin + dK * i/((r_8)nSubInterv);
+  }
 
 
   std::cout << "Dump klp values:\n";
@@ -119,10 +85,8 @@ void test0() {
   std::cout << std::endl;
 
   
-  maxRoots = klp.size();
-  
   printf("ell=%d, Rcur=%f, Nintervales=%d, Nradius=%d\n",
-	 ell,Rcur,maxRoots-1,nbreOfRadius);
+	 ell,Rcur,nSubInterv,nbreOfRadius);
 
 
 
@@ -134,11 +98,8 @@ void test0() {
 
   //Integration
   r_8 integral = 0.;
-  //Split the [kmin, kmax] intervalle into sub-intervales
-  r_8 kmin =  klp[0];
-  r_8 kmax = klp[maxRoots-1];
 
-  for(int p = 1; p<maxRoots; p++){ //init at p=1
+  for(int p = 1; p<nSubInterv; p++){ //init at p=1
 
     //get the bounds
     r_8 lowBound = klp[p-1];
@@ -168,8 +129,8 @@ void test0() {
   if(R[0] != R[1]){
     r_8 Rdiff = R[0]-R[1];
     r_8 Rsum  = R[0]+R[1];
-    true_int = (Rdiff*(cos(ell*M_PI-kmin*Rsum) - cos(ell*M_PI-kmax*Rsum)) 
-		- Rsum*( sin(kmin*Rdiff)-sin(kmax*Rdiff)) )/(2.*Rdiff*Rsum);
+    true_int = (Rdiff*(cos(ell*M_PI-kmin*Rsum) - cos(ell*M_PI-kMax*Rsum)) 
+		- Rsum*( sin(kmin*Rdiff)-sin(kMax*Rdiff)) )/(2.*Rdiff*Rsum);
   }
   std::cout << "True Integ = " << true_int 
 	    << " diff= " << true_int - integral
@@ -214,11 +175,12 @@ int main(int narg, char *arg[]) {
   int Lmax = 1000;
   r_8 R1 = 3350.; //Mpc z=1.0
   r_8 R2 = 3592.; //Mpc z=1.1
-  r_8 kmax = 1.0; //Mpc^(-1)
+  r_8 kMin = 0.;
+  r_8 kMax = 1.0; //Mpc^(-1)
 
   int chebyshev_order_1 = 9;
   int chebyshev_order_2 =  chebyshev_order_1;
-  int n_bessel_roots_per_interval = 100;
+  int n_sub_intervals = 10;
 
   int ka=1;
   while (ka<narg) {
@@ -229,8 +191,12 @@ int main(int narg, char *arg[]) {
       Lmax=atoi(arg[ka+1]);
       ka+=2;
     }
+    else if (strcmp(arg[ka],"-kmin")==0) {
+      kMin=atof(arg[ka+1]);
+      ka+=2;
+    }
     else if (strcmp(arg[ka],"-kmax")==0) {
-      kmax=atof(arg[ka+1]);
+      kMax=atof(arg[ka+1]);
       ka+=2;
     }
     else if (strcmp(arg[ka],"-r1")==0) {
@@ -257,18 +223,15 @@ int main(int narg, char *arg[]) {
   }//eo while
 
 
-  //Bessel parameters
-  para.Lmax_for_xmin = 5000;
-  para.jl_xmin_cut   = 5e-10;
-
   para.Lmax = Lmax;
-  para.kmax = kmax;
+  para.kMin = kMin;
+  para.kMax = kMax;
   para.R1 = R1;
   para.R2 = R2;
 
   para.chebyshev_order_1  = chebyshev_order_1;
   para.chebyshev_order_2  = chebyshev_order_2;
-  para.n_bessel_roots_per_interval = n_bessel_roots_per_interval;
+  para.n_sub_intervals = n_sub_intervals;
     
 
   std::cout << "Configuration parameters are set to: " << std::endl;
