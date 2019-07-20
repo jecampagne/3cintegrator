@@ -171,7 +171,9 @@ void test0() {
     true_int = (Rdiff*(cos(ell*M_PI-kmin*Rsum) - cos(ell*M_PI-kmax*Rsum)) 
 		- Rsum*( sin(kmin*Rdiff)-sin(kmax*Rdiff)) )/(2.*Rdiff*Rsum);
   }
-  std::cout << "True Integ = " << true_int << std::endl;
+  std::cout << "True Integ = " << true_int 
+	    << " diff= " << true_int - integral
+	    << std::endl;
 
 
 
