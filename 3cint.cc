@@ -16,7 +16,7 @@ namespace Angpow {
 struct PARAM {
   int Lmax_for_xmin;
   r_8 jl_xmin_cut;
-  int Lmax;
+  int ell;
   r_8 kMin;
   r_8 kMax;
   r_8 R1;
@@ -42,9 +42,6 @@ private:
 };//ProdJBess
 
 
-
-
-
 void test0() {
   r_8 kMin = para.kMin;
   r_8 kMax = para.kMax;
@@ -52,42 +49,21 @@ void test0() {
   int nSubInterv = para.n_sub_intervals;
 
 
+  //Function to be integrated
   std::vector<r_8> R(2);
   R[0] = para.R1;
   R[1] = para.R2;
-  //Total Nber of Radius
-  int nbreOfRadius = R.size();
-
-  r_8 Rcur = std::accumulate(R.begin(), R.end(), 0.)/((r_8)R.size());
-
-  //  r_8 kscale = 1./Rcur;
-
-  
-  //Start here for a specific ell
-  int ell = 20;
-  std::cout << "ell = " << ell << std::endl;
-
-  //Function to be integrated
+  int ell = para.ell;
   FuncType1* f1 = new FuncType1(ell,R[0]);
   FuncType1* f2 = new FuncType1(ell,R[1]);
 
-  //final k-integral bounds
+  //k-integral bounds
   std::vector<r_8> klp(nSubInterv+1);
   r_8 dK = kMax-kMin;
   for(int i=0; i<= nSubInterv; i++){
     klp[i] = kMin + dK * i/((r_8)nSubInterv);
   }
-
-
-  std::cout << "Dump klp values:\n";
-  for(int i=0;i<klp.size();i++){
-    std::cout << klp[i] << " "; 
-  }
-  std::cout << std::endl;
-
-  
-  printf("ell=%d, Rcur=%f, Nintervales=%d, Nradius=%d\n",
-	 ell,Rcur,nSubInterv,nbreOfRadius);
+  printf("ell=%d, Nintervales=%d\n", ell,nSubInterv);
 
 
 
@@ -100,14 +76,14 @@ void test0() {
   //Integration
   r_8 integral = 0.;
 
-  for(int p = 1; p<=nSubInterv; p++){ //init at p=1
+  for(int p = 1; p<= nSubInterv; p++){ //init at p=1
 
     //get the bounds
     r_8 lowBound = klp[p-1];
     r_8 uppBound = klp[p];
 
-    std::cout << "current interval: [" << lowBound << ", " << uppBound << "]" 
-	      << std::endl;
+//     std::cout << "current interval: [" << lowBound << ", " << uppBound << "]" 
+// 	      << std::endl;
     
     if(lowBound > uppBound)
       throw AngpowError("KIntegrator::Compute uppBound < lowBound Fatal");
@@ -170,23 +146,23 @@ int main(int narg, char *arg[]) {
   //The cosmological distance tool
    
   int test=0;
-  int Lmax = 1000;
-  r_8 R1 = 3350.; //Mpc z=1.0
-  r_8 R2 = 3592.; //Mpc z=1.1
+  int ell= 20;
+  r_8 R1 = 2000.; //Mpc z=1.0
+  r_8 R2 = 2200.; //Mpc z=1.1
   r_8 kMin = 0.;
   r_8 kMax = 1.0; //Mpc^(-1)
 
-  int chebyshev_order_1 = 9;
+  int chebyshev_order_1 = 8;
   int chebyshev_order_2 =  chebyshev_order_1;
-  int n_sub_intervals = 10;
+  int n_sub_intervals = 5;
 
   int ka=1;
   while (ka<narg) {
     if (strcmp(arg[ka],"-h")==0) {
       return 0;
     }
-    else if (strcmp(arg[ka],"-lmax")==0) {
-      Lmax=atoi(arg[ka+1]);
+    else if (strcmp(arg[ka],"-l")==0) {
+      ell=atoi(arg[ka+1]);
       ka+=2;
     }
     else if (strcmp(arg[ka],"-kmin")==0) {
@@ -221,7 +197,7 @@ int main(int narg, char *arg[]) {
   }//eo while
 
 
-  para.Lmax = Lmax;
+  para.ell = ell;
   para.kMin = kMin;
   para.kMax = kMax;
   para.R1 = R1;
