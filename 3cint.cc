@@ -14,8 +14,6 @@
 namespace Angpow {
 
 struct PARAM {
-  int Lmax_for_xmin;
-  r_8 jl_xmin_cut;
   int ell;
   r_8 kMin;
   r_8 kMax;
@@ -231,14 +229,14 @@ int main(int narg, char *arg[]) {
     rc = 99;
   }
   catch (std::exception & e) {
-    std::cerr << " besssht.cc: Catched std::xception "  
+    std::cerr << " 3cint.cc: Catched std::xception "  
 	 << " - what()= " << e.what() << std::endl;
     rc = 98;
   }
   catch (...) {
-    std::cerr << " besssht.cc: some other exception (...) was caught ! " << std::endl;
+    std::cerr << " 3cint.cc: some other exception (...) was caught ! " << std::endl;
     rc = 97;
   }
-  std::cout << " ---- Programme besssht.cc -  FIN  (Rc=" << rc << ") --- " << std::endl;
+  std::cout << " ---- Programme 3cint.cc -  FIN  (Rc=" << rc << ") --- " << std::endl;
   return rc;
 }//main
