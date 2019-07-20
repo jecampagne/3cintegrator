@@ -1,3 +1,4 @@
+#include <string.h>
 #include <cstdio>
 #include <stdlib.h>
 #include <iostream>
@@ -45,9 +46,9 @@ private:
 
 
 void test0() {
-  r_8 kMin = para.kmin;
-  r_8 kMax = para.kmax;
-  int Lmax = para.Lmax; //ell<Lmax
+  r_8 kMin = para.kMin;
+  r_8 kMax = para.kMax;
+  //  int Lmax = para.Lmax; //ell<Lmax
   int nSubInterv = para.n_sub_intervals;
 
 
@@ -59,7 +60,7 @@ void test0() {
 
   r_8 Rcur = std::accumulate(R.begin(), R.end(), 0.)/((r_8)R.size());
 
-  r_8 kscale = 1./Rcur;
+  //  r_8 kscale = 1./Rcur;
 
   
   //Start here for a specific ell
@@ -71,9 +72,9 @@ void test0() {
   FuncType1* f2 = new FuncType1(ell,R[1]);
 
   //final k-integral bounds
-  std::vector<r_8> klp(nSubInterv);
+  std::vector<r_8> klp(nSubInterv+1);
   r_8 dK = kMax-kMin;
-  for(int i=0; i<=nSubInterv; i++){
+  for(int i=0; i<= nSubInterv; i++){
     klp[i] = kMin + dK * i/((r_8)nSubInterv);
   }
 
@@ -99,7 +100,7 @@ void test0() {
   //Integration
   r_8 integral = 0.;
 
-  for(int p = 1; p<nSubInterv; p++){ //init at p=1
+  for(int p = 1; p<=nSubInterv; p++){ //init at p=1
 
     //get the bounds
     r_8 lowBound = klp[p-1];
@@ -129,8 +130,8 @@ void test0() {
   if(R[0] != R[1]){
     r_8 Rdiff = R[0]-R[1];
     r_8 Rsum  = R[0]+R[1];
-    true_int = (Rdiff*(cos(ell*M_PI-kmin*Rsum) - cos(ell*M_PI-kMax*Rsum)) 
-		- Rsum*( sin(kmin*Rdiff)-sin(kMax*Rdiff)) )/(2.*Rdiff*Rsum);
+    true_int = (Rdiff*(cos(ell*M_PI-kMin*Rsum) - cos(ell*M_PI-kMax*Rsum)) 
+		- Rsum*( sin(kMin*Rdiff)-sin(kMax*Rdiff)) )/(2.*Rdiff*Rsum);
   }
   std::cout << "True Integ = " << true_int 
 	    << " diff= " << true_int - integral
@@ -141,9 +142,6 @@ void test0() {
   //-------
   // clean
   //-------
-  // Bessel stuff
-  delete jlPtr;
-  delete jliniPtr;
   // Che
   delete cheInt;
   // func
@@ -216,7 +214,7 @@ int main(int narg, char *arg[]) {
       ka+=2;      
     }    
     else if (strcmp(arg[ka],"-nroot")==0) {
-      n_bessel_roots_per_interval  = atoi(arg[ka+1]);
+      n_sub_intervals= atoi(arg[ka+1]);
       ka+=2;      
     }    
     else ka++;
