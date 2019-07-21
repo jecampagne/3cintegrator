@@ -18,6 +18,11 @@ g(k) = x(x-1)^2
 ```
 (nb. here it is supposed implicitly that kmin=0, kmax=1).
 
+Here is an example with R1=2000, R2=2200, ell=20
+![test](./test/test.png "Image Title")
+
+
+
 The user has to provide the function parameters, 
 the  integral bounds kMin and kMax, 
 the number of k-sub intervales, the chebyshev orders to perform Chebyshev 
