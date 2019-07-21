@@ -24,7 +24,20 @@ struct PARAM {
   int n_sub_intervals;
 } para ;
 
+  //smooth common function
+class FuncType0: public ClassFunc1D {
+public:
+  FuncType0(r_8 p, r_8 scale): p_(p), scale_(scale) {}
+  inline virtual r_8 operator()(r_8 x) const {
+    return pow(x,p_)*exp(-scale_*x);
+  }
+  virtual ~FuncType0() {}
+private:
+  r_8 p_;
+  r_8 scale_; 
+};
 
+  //high oscillatory function
 class FuncType1: public ClassFunc1D {
 
 public:
@@ -38,6 +51,15 @@ private:
   r_8 R_; 
 
 };//ProdJBess
+
+
+  /*
+    Example of the computation of the integral
+    \int_{kmin}^{kmax} f0(k) f1(kR1,ell) f2(kR2,ell) dx
+    with 
+    f0 a common smooth function
+    f1, f2 two higly oscillatory functions
+   */
 
 
 void test0() {
@@ -54,6 +76,8 @@ void test0() {
   int ell = para.ell;
   FuncType1* f1 = new FuncType1(ell,R[0]);
   FuncType1* f2 = new FuncType1(ell,R[1]);
+  FuncType0* f0 = new FuncType0(2.,7.);
+  
 
   //k-integral bounds
   std::vector<r_8> klp(nSubInterv+1);
@@ -69,7 +93,8 @@ void test0() {
   int iOrd1 = para.chebyshev_order_1;
   int iOrd2 = para.chebyshev_order_2;
   ChebyshevIntNonSym* cheInt =  new ChebyshevIntNonSym(iOrd1, iOrd2);
-
+  int nOrderProd = cheInt->nOrdProd();
+  std::cout << "Order of the final Chebyshev polynomial: " << nOrderProd << std::endl;
 
   //Integration
   r_8 integral = 0.;
@@ -86,13 +111,20 @@ void test0() {
     if(lowBound > uppBound)
       throw AngpowError("KIntegrator::Compute uppBound < lowBound Fatal");
     
-    //get the Chebyshev coeffs in the final space for each fonctions
+    //get the  sampling in the final space for each fonctions using Chebyshev transformation
     std::vector<r_8> ChebTrans1;
     cheInt->ChebyshevTransform(f1,0,ChebTrans1,lowBound,uppBound);
     std::vector<r_8> ChebTrans2;
     cheInt->ChebyshevTransform(f2,0,ChebTrans2,lowBound,uppBound);
+
+    //get the sampling of the common fonction in the final space using the nodes of the ClenshawCurtis quadrature implied by the Chebyshev transform
+    std::vector<r_8> Samples0(nOrderProd);
+    cheInt->ChebyshevSampling(Samples0,*f0,lowBound,uppBound);
     
-    //compute local integral
+    //Here make the product of the samples of common part and the first function
+    for (size_t i=0;i<ChebTrans1.size();i++) ChebTrans1[i]*=Samples0[i];
+    
+
     integral += 
       cheInt->ComputeIntegral(ChebTrans1,ChebTrans2,lowBound,uppBound);
   }//p-loop 
@@ -119,6 +151,7 @@ void test0() {
   // Che
   delete cheInt;
   // func
+  delete f0;
   delete f1;
   delete f2;
 

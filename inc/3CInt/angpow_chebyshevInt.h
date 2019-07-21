@@ -53,6 +53,10 @@ class ChebyshevIntBase {
     if (planInv_){   delete planInv_;   planInv_   = 0;}
     if (planCC_){    delete planCC_;    planCC_    = 0;}
   }
+
+  //Getter (JEC 21/7/19)
+  int nOrdProd() {return nOrdProd_;}
+
     
   //Should be callsed explicitly
   void Init(int nOrdProd);
@@ -63,7 +67,7 @@ class ChebyshevIntBase {
   r_8 ComputeIntegral(std::vector<r_8>& v1, std::vector<r_8>& v2, r_8 lowBnd, r_8 uppBnd);
   
     
- protected:
+ public:  //was protected JEC 21/7/19
 
   /*! ChebyshevSampling
     Perform function sampling on the Chebyshev points defined in the range [a,b]
