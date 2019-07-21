@@ -14,9 +14,9 @@ f_\ell(k,R) = \cos( kR - \ell \pi/2 - \pi/4)
 and g(k) a common smooth part as for exemple
 
 ```math
-g(k) = k^p \exp(-k\ s)
+g(k) = x(x-1)^2
 ```
-with (p=2 and s=7)
+(nb. here it is supposed implicitly that kmin=0, kmax=1).
 
 The user has to provide the function parameters, 
 the  integral bounds kMin and kMax, 
@@ -50,12 +50,12 @@ Output
 
     Configuration parameters are set to: 
     ell=20, Nintervales=5
-    Approx. Integ = -0.0019508
-    True Integ = -0.0019508 diff= 3.67111e-15
+    Order of the final Chebyshev polynomial: 513
+    Approx. Integ = -1.23899e-05
+    True Integ = -1.23899e-05 diff= 3.58456e-16
     End test0......
     ---/ Fin bloc try ---- 
     ---- Programme 3cint.cc -  FIN  (Rc=0) --- 
-
 
 
 
