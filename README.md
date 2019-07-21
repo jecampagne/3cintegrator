@@ -14,7 +14,7 @@ f_\ell(k,R) = \cos( kR - \ell \pi/2 - \pi/4)
 and g(k) a common smooth part as for exemple
 
 ```math
-g(k) = k^p \exp(-k*s)
+g(k) = k^p \exp(-k\ s)
 ```
 with (p=2 and s=7)
 
