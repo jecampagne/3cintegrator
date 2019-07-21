@@ -24,12 +24,12 @@ struct PARAM {
   int n_sub_intervals;
 } para ;
 
-  //smooth common function
+//smooth common function
 class FuncType0: public ClassFunc1D {
 public:
-  FuncType0(r_8 p, r_8 scale): p_(p), scale_(scale) {}
+  FuncType0() {}
   inline virtual r_8 operator()(r_8 x) const {
-    return pow(x,p_)*exp(-scale_*x);
+    return x * (x-1.)*(x-1.);
   }
   virtual ~FuncType0() {}
 private:
@@ -37,7 +37,7 @@ private:
   r_8 scale_; 
 };
 
-  //high oscillatory function
+//high oscillatory function
 class FuncType1: public ClassFunc1D {
 
 public:
@@ -51,6 +51,46 @@ private:
   r_8 R_; 
 
 };//ProdJBess
+
+
+  r_8 truth_test0(int l, r_8 R1, r_8 R2, r_8 a, r_8 b) {
+  
+  r_8 res = 0;
+ 
+  if(R1 != R2) {
+    res = ((-3*(-2 + pow(a,2.)*pow(R1 - R2,2.))*cos(a*(R1 - R2)))/pow(R1 - R2,4.) - 
+     cos(a*(R1 - R2))/pow(R1 - R2,2.) + (4*a*cos(a*(R1 - R2)))/pow(R1 - R2,2.) + 
+     (3*(-2 + pow(b,2.)*pow(R1 - R2,2.))*cos(b*(R1 - R2)))/pow(R1 - R2,4.) + 
+     cos(b*(R1 - R2))/pow(R1 - R2,2.) - (4*b*cos(b*(R1 - R2)))/pow(R1 - R2,2.) - 
+     (a*(-6 + pow(a,2.)*pow(R1 - R2,2.))*sin(a*(R1 - R2)))/pow(R1 - R2,3.) + 
+     (2*(-2 + pow(a,2.)*pow(R1 - R2,2.))*sin(a*(R1 - R2)))/pow(R1 - R2,3.) - 
+     (a*sin(a*(R1 - R2)))/(R1 - R2) + 
+     (b*(-6 + pow(b,2.)*pow(R1 - R2,2.))*sin(b*(R1 - R2)))/pow(R1 - R2,3.) - 
+     (2*(-2 + pow(b,2.)*pow(R1 - R2,2.))*sin(b*(R1 - R2)))/pow(R1 - R2,3.) + 
+     (b*sin(b*(R1 - R2)))/(R1 - R2) + 
+     (a*(R1 + R2)*cos(l*M_PI - a*(R1 + R2)) + sin(l*M_PI - a*(R1 + R2)))/pow(R1 + R2,2.) - 
+     (2*((-2 + pow(a,2.)*pow(R1 + R2,2.))*cos(l*M_PI - a*(R1 + R2)) + 
+          2*a*(R1 + R2)*sin(l*M_PI - a*(R1 + R2))))/pow(R1 + R2,3.) + 
+     (a*(R1 + R2)*(-6 + pow(a,2.)*pow(R1 + R2,2.))*cos(l*M_PI - a*(R1 + R2)) + 
+        3*(-2 + pow(a,2.)*pow(R1 + R2,2.))*sin(l*M_PI - a*(R1 + R2)))/pow(R1 + R2,4.) - 
+     (b*(R1 + R2)*cos(l*M_PI - b*(R1 + R2)) + sin(l*M_PI - b*(R1 + R2)))/pow(R1 + R2,2.) + 
+     (2*((-2 + pow(b,2.)*pow(R1 + R2,2.))*cos(l*M_PI - b*(R1 + R2)) + 
+          2*b*(R1 + R2)*sin(l*M_PI - b*(R1 + R2))))/pow(R1 + R2,3.) - 
+     (b*(R1 + R2)*(-6 + pow(b,2.)*pow(R1 + R2,2.))*cos(l*M_PI - b*(R1 + R2)) + 
+      3*(-2 + pow(b,2.)*pow(R1 + R2,2.))*sin(l*M_PI - b*(R1 + R2)))/pow(R1 + R2,4.))/2.;
+
+  } else {
+    res = (-2*pow(a,2.)*(6 - 8*a + 3*pow(a,2.))*pow(R1,4.) + 
+     2*pow(b,2.)*(6 - 8*b + 3*pow(b,2.))*pow(R1,4.) + 
+     6*R1*(2 - 4*pow(a,2.)*pow(R1,2.) + 2*pow(a,3.)*pow(R1,2.) + 
+        a*(-3 + 2*pow(R1,2.)))*cos(l*M_PI - 2*a*R1) - 
+     6*R1*(2 - 4*pow(b,2.)*pow(R1,2.) + 2*pow(b,3.)*pow(R1,2.) + 
+        b*(-3 + 2*pow(R1,2.)))*cos(l*M_PI - 2*b*R1) + 
+     3*(-3 + (2 - 8*a + 6*pow(a,2.))*pow(R1,2.))*sin(l*M_PI - 2*a*R1) - 
+	   3*(-3 + (2 - 8*b + 6*pow(b,2.))*pow(R1,2.))*sin(l*M_PI - 2*b*R1))/(48.*pow(R1,4.)); 
+  }
+  return res;
+}
 
 
   /*
@@ -76,7 +116,7 @@ void test0() {
   int ell = para.ell;
   FuncType1* f1 = new FuncType1(ell,R[0]);
   FuncType1* f2 = new FuncType1(ell,R[1]);
-  FuncType0* f0 = new FuncType0(2.,7.);
+  FuncType0* f0 = new FuncType0();
   
 
   //k-integral bounds
@@ -132,13 +172,7 @@ void test0() {
   std::cout << "Approx. Integ = " << integral << std::endl;
 
   //truth
-  r_8 true_int = 0.;
-  if(R[0] != R[1]){
-    r_8 Rdiff = R[0]-R[1];
-    r_8 Rsum  = R[0]+R[1];
-    true_int = (Rdiff*(cos(ell*M_PI-kMin*Rsum) - cos(ell*M_PI-kMax*Rsum)) 
-		- Rsum*( sin(kMin*Rdiff)-sin(kMax*Rdiff)) )/(2.*Rdiff*Rsum);
-  }
+  r_8 true_int = truth_test0(ell,R[0],R[1],kMin,kMax);
   std::cout << "True Integ = " << true_int 
 	    << " diff= " << true_int - integral
 	    << std::endl;
