@@ -6,8 +6,8 @@
 #include "3CInt/angpow_exceptions.h"
 #include "3CInt/angpow_numbers.h"
 #include "3CInt/angpow_func.h"
-#include "3CInt/angpow_tools.h"
-#include "3CInt/angpow_chebyshevInt.h"
+#include "3Cint/3cint_chefunc.h"
+#include "3Cint/3cint_chealgo.h"
 #include "3CInt/walltimer.h"
 
 
@@ -107,17 +107,10 @@ void test0() {
   r_8 kMax = para.kMax;
   //  int Lmax = para.Lmax; //ell<Lmax
   int nSubInterv = para.n_sub_intervals;
-
-
-  //Function to be integrated
   std::vector<r_8> R(2);
   R[0] = para.R1;
   R[1] = para.R2;
   int ell = para.ell;
-  FuncType1* f1 = new FuncType1(ell,R[0]);
-  FuncType1* f2 = new FuncType1(ell,R[1]);
-  FuncType0* f0 = new FuncType0();
-  
 
   //k-integral bounds
   std::vector<r_8> klp(nSubInterv+1);
@@ -129,12 +122,23 @@ void test0() {
 
 
 
+  //Function to be integrated
+  FuncType1* f1 = new FuncType1(ell,R[0]);
+  FuncType1* f2 = new FuncType1(ell,R[1]);
+  FuncType0* f0 = new FuncType0();
+  
   // Chebyshev machinery 
+  int iOrd0 = 2;
   int iOrd1 = para.chebyshev_order_1;
   int iOrd2 = para.chebyshev_order_2;
-  ChebyshevIntNonSym* cheInt =  new ChebyshevIntNonSym(iOrd1, iOrd2);
-  int nOrderProd = cheInt->nOrdProd();
-  std::cout << "Order of the final Chebyshev polynomial: " << nOrderProd << std::endl;
+  
+  std::vector<CheFunc*> farr;
+  farr.push_back(new CheFunc(f1, iOrd1));
+  farr.push_back(new CheFunc(f2, iOrd2));
+  farr.push_back(new CheFunc(f0, iOrd0));
+  
+  //Initialisation of the Clenshow-Curtis quadrature
+  CheAlgo cheAlgo(farr);
 
   //Integration
   r_8 integral = 0.;
@@ -144,29 +148,23 @@ void test0() {
     //get the bounds
     r_8 lowBound = klp[p-1];
     r_8 uppBound = klp[p];
-
 //     std::cout << "current interval: [" << lowBound << ", " << uppBound << "]" 
 // 	      << std::endl;
     
     if(lowBound > uppBound)
       throw AngpowError("KIntegrator::Compute uppBound < lowBound Fatal");
     
-    //get the  sampling in the final space for each fonctions using Chebyshev transformation
-    std::vector<r_8> ChebTrans1;
-    cheInt->ChebyshevTransform(f1,0,ChebTrans1,lowBound,uppBound);
-    std::vector<r_8> ChebTrans2;
-    cheInt->ChebyshevTransform(f2,0,ChebTrans2,lowBound,uppBound);
+    //Loop on each function to compute their  Foward Chebyshev coefficents
+    for(size_t i=0;i<farr.size();i++){
+      farr[i]->ChebyshevTransform(lowBound, uppBound);
+    }
 
-    //get the sampling of the common fonction in the final space using the nodes of the ClenshawCurtis quadrature implied by the Chebyshev transform
-    std::vector<r_8> Samples0(nOrderProd);
-    cheInt->ChebyshevSampling(Samples0,*f0,lowBound,uppBound);
-    
-    //Here make the product of the samples of common part and the first function
-    for (size_t i=0;i<ChebTrans1.size();i++) ChebTrans1[i]*=Samples0[i];
-    
+    //Compute the sampling of all the functions in the final space dimension
+    cheAlgo.InverseChebyshevTransform();
 
-    integral += 
-      cheInt->ComputeIntegral(ChebTrans1,ChebTrans2,lowBound,uppBound);
+    //Compute the integral thanks to CC quadrature and the function sampling 
+    integral += (uppBound - lowBound) * cheAlgo.ComputeIntegralUnscaled();
+    
   }//p-loop 
 
   std::cout << "Approx. Integ = " << integral << std::endl;
@@ -182,12 +180,13 @@ void test0() {
   //-------
   // clean
   //-------
-  // Che
-  delete cheInt;
   // func
-  delete f0;
-  delete f1;
-  delete f2;
+  if(f0) delete f0;
+  if(f1) delete f1;
+  if(f2) delete f2;
+  // Che-stuff
+  for(size_t i=0;i<farr.size();i++) delete farr[i];
+  farr.clear();
 
     
 

@@ -74,15 +74,11 @@ makedir :
 
 #C++ common Objects
 CXXOBJ = $(OBJ)walltimer.o \
-	$(OBJ)walltime_c.o \
-	$(OBJ)angpow_chebyshevInt.o
-
+	$(OBJ)walltime_c.o
 
 
 CXXSHOBJ = walltimer.o \
-	walltime_c.o \
-	angpow_chebyshevInt.o
-
+	walltime_c.o
 
 
 #C++ common Headers
@@ -92,7 +88,9 @@ CXXHDR =  $(INCEXT)walltimer.h \
 	$(INCEXT)angpow_exceptions.h \
 	$(INCEXT)angpow_func.h  \
 	$(INCEXT)angpow_fft.h \
-	$(INCEXT)angpow_chebyshevInt.h
+	$(INCEXT)3cint_chefunc.h \
+	$(INCEXT)3cint_chealgo.h
+
 
 
 
