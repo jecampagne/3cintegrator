@@ -6,8 +6,8 @@
 #include "3CInt/angpow_exceptions.h"
 #include "3CInt/angpow_numbers.h"
 #include "3CInt/angpow_func.h"
-#include "3Cint/3cint_chefunc.h"
-#include "3Cint/3cint_chealgo.h"
+#include "3CInt/3cint_chefunc.h"
+#include "3CInt/3cint_chealgo.h"
 #include "3CInt/walltimer.h"
 
 
