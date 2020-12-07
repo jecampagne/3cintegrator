@@ -79,7 +79,8 @@ class CheFunc {
 
   //void ChebyshevSampling(r_8 a, r_8 b);
   void ChebyshevCoeffFFT();
-  void ChebyshevTransform(Angpow::r_8 a, Angpow::r_8 b);
+//void ChebyshevTransform(Angpow::r_8 a, Angpow::r_8 b);
+  void ChebyshevTransform(double a, double b);
 };
 
 //////////////////////////////
@@ -104,3 +105,4 @@ public:
 
 %include std_vector.i
 %template(std_vector_CheFunc)  std::vector<Angpow::CheFunc*>;
+%template(std_vector_double)  std::vector<double>;
