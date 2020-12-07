@@ -1,7 +1,8 @@
 
 import Angpow
 
-#class FuncType0:
+class FuncType0:
+  dummy = 2
 #  def __init__(self):
 #public Angpow.ClassFunc1D
 #  inline virtual r_8 operator()(r_8 x) const {
@@ -12,9 +13,8 @@ import Angpow
 #  r_8 scale_; 
 #};
 
-
 def test0():
-  #f0 = FuncType0()
+  f0 = FuncType0()
   
   iOrd0 = 2;
   
