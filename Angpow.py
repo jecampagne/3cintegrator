@@ -86,35 +86,33 @@ class wallTimer(_object):
 wallTimer_swigregister = Angpow_swig_py.wallTimer_swigregister
 wallTimer_swigregister(wallTimer)
 
-class GenericFunction(_object):
+class ClassFunc1D(_object):
     __swig_setmethods__ = {}
-    __setattr__ = lambda self, name, value: _swig_setattr(self, GenericFunction, name, value)
-    __swig_getmethods__ = {}
-    __getattr__ = lambda self, name: _swig_getattr(self, GenericFunction, name)
-    __repr__ = _swig_repr
-    def __init__(self): 
-        this = Angpow_swig_py.new_GenericFunction()
-        try: self.this.append(this)
-        except: self.this = this
-    __swig_destroy__ = Angpow_swig_py.delete_GenericFunction
-    __del__ = lambda self : None;
-GenericFunction_swigregister = Angpow_swig_py.GenericFunction_swigregister
-GenericFunction_swigregister(GenericFunction)
-
-class ClassFunc1D(GenericFunction):
-    __swig_setmethods__ = {}
-    for _s in [GenericFunction]: __swig_setmethods__.update(getattr(_s,'__swig_setmethods__',{}))
     __setattr__ = lambda self, name, value: _swig_setattr(self, ClassFunc1D, name, value)
     __swig_getmethods__ = {}
-    for _s in [GenericFunction]: __swig_getmethods__.update(getattr(_s,'__swig_getmethods__',{}))
     __getattr__ = lambda self, name: _swig_getattr(self, ClassFunc1D, name)
     def __init__(self, *args, **kwargs): raise AttributeError("No constructor defined - class is abstract")
     __repr__ = _swig_repr
-    def __call__(self, *args): return Angpow_swig_py.ClassFunc1D___call__(self, *args)
     __swig_destroy__ = Angpow_swig_py.delete_ClassFunc1D
     __del__ = lambda self : None;
+    def __call__(self, *args): return Angpow_swig_py.ClassFunc1D___call__(self, *args)
 ClassFunc1D_swigregister = Angpow_swig_py.ClassFunc1D_swigregister
 ClassFunc1D_swigregister(ClassFunc1D)
+
+class Py_ClassFunc1D(ClassFunc1D):
+    __swig_setmethods__ = {}
+    for _s in [ClassFunc1D]: __swig_setmethods__.update(getattr(_s,'__swig_setmethods__',{}))
+    __setattr__ = lambda self, name, value: _swig_setattr(self, Py_ClassFunc1D, name, value)
+    __swig_getmethods__ = {}
+    for _s in [ClassFunc1D]: __swig_getmethods__.update(getattr(_s,'__swig_getmethods__',{}))
+    __getattr__ = lambda self, name: _swig_getattr(self, Py_ClassFunc1D, name)
+    def __init__(self, *args, **kwargs): raise AttributeError("No constructor defined - class is abstract")
+    __repr__ = _swig_repr
+    __swig_destroy__ = Angpow_swig_py.delete_Py_ClassFunc1D
+    __del__ = lambda self : None;
+    def get_value(self, *args): return Angpow_swig_py.Py_ClassFunc1D_get_value(self, *args)
+Py_ClassFunc1D_swigregister = Angpow_swig_py.Py_ClassFunc1D_swigregister
+Py_ClassFunc1D_swigregister(Py_ClassFunc1D)
 
 class CheFunc(_object):
     __swig_setmethods__ = {}

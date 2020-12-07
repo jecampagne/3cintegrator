@@ -13,18 +13,28 @@ public:
 
 namespace Angpow {
 
-class GenericFunction {
-public:
-  GenericFunction();
-  virtual ~GenericFunction();
-};
+  //class GenericFunction {
+  //public:
+  //  GenericFunction();
+  //  virtual ~GenericFunction();
+  //};
 
-class ClassFunc1D : public GenericFunction {
+class ClassFunc1D {
+public:  
+  ClassFunc1D();
+  virtual ~ClassFunc1D();
 public:
   virtual double operator()(double x) const = 0;
-  //virtual void getValues(const std::vector<double>& vin, std::vector<double>& vout) const;
 };
 
+class Py_ClassFunc1D : public ClassFunc1D {
+public:  
+  Py_ClassFunc1D();
+  virtual ~Py_ClassFunc1D();
+public:
+  virtual double get_value(double x) const = 0;
+};
+ 
 //class Function1D
 //: public ClassFunc1D
 //{
