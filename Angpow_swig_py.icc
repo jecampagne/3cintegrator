@@ -2934,15 +2934,21 @@ SWIG_Python_NonDynamicSetAttr(PyObject *obj, PyObject *name, PyObject *value) {
 
 /* -------- TYPES TABLE (BEGIN) -------- */
 
-#define SWIGTYPE_p_Angpow__Function1D swig_types[0]
-#define SWIGTYPE_p_Angpow__Function2D swig_types[1]
-#define SWIGTYPE_p_Angpow__GenericFunction swig_types[2]
-#define SWIGTYPE_p_char swig_types[3]
-#define SWIGTYPE_p_f_double__double swig_types[4]
-#define SWIGTYPE_p_f_double_double__double swig_types[5]
-#define SWIGTYPE_p_wallTimer swig_types[6]
-static swig_type_info *swig_types[8];
-static swig_module_info swig_module = {swig_types, 7, 0, 0, 0, 0};
+#define SWIGTYPE_p_Angpow__CheAlgo swig_types[0]
+#define SWIGTYPE_p_Angpow__CheFunc swig_types[1]
+#define SWIGTYPE_p_Angpow__ClassFunc1D swig_types[2]
+#define SWIGTYPE_p_Angpow__Function1D swig_types[3]
+#define SWIGTYPE_p_Angpow__Function2D swig_types[4]
+#define SWIGTYPE_p_Angpow__GenericFunction swig_types[5]
+#define SWIGTYPE_p_char swig_types[6]
+#define SWIGTYPE_p_f_double__double swig_types[7]
+#define SWIGTYPE_p_f_double_double__double swig_types[8]
+#define SWIGTYPE_p_r_8 swig_types[9]
+#define SWIGTYPE_p_std__vectorT_Angpow__CheFunc_p_t swig_types[10]
+#define SWIGTYPE_p_std__vectorT_double_t swig_types[11]
+#define SWIGTYPE_p_wallTimer swig_types[12]
+static swig_type_info *swig_types[14];
+static swig_module_info swig_module = {swig_types, 13, 0, 0, 0, 0};
 #define SWIG_TypeQuery(name) SWIG_TypeQueryModule(&swig_module, &swig_module, name)
 #define SWIG_MangledTypeQuery(name) SWIG_MangledTypeQueryModule(&swig_module, &swig_module, name)
 
@@ -3085,6 +3091,114 @@ SWIG_AsVal_double (PyObject *obj, double *val)
 
   #define SWIG_From_double   PyFloat_FromDouble 
 
+
+#include <limits.h>
+#if !defined(SWIG_NO_LLONG_MAX)
+# if !defined(LLONG_MAX) && defined(__GNUC__) && defined (__LONG_LONG_MAX__)
+#   define LLONG_MAX __LONG_LONG_MAX__
+#   define LLONG_MIN (-LLONG_MAX - 1LL)
+#   define ULLONG_MAX (LLONG_MAX * 2ULL + 1ULL)
+# endif
+#endif
+
+
+#include <float.h>
+
+
+#include <math.h>
+
+
+SWIGINTERNINLINE int
+SWIG_CanCastAsInteger(double *d, double min, double max) {
+  double x = *d;
+  if ((min <= x && x <= max)) {
+   double fx = floor(x);
+   double cx = ceil(x);
+   double rd =  ((x - fx) < 0.5) ? fx : cx; /* simple rint */
+   if ((errno == EDOM) || (errno == ERANGE)) {
+     errno = 0;
+   } else {
+     double summ, reps, diff;
+     if (rd < x) {
+       diff = x - rd;
+     } else if (rd > x) {
+       diff = rd - x;
+     } else {
+       return 1;
+     }
+     summ = rd + x;
+     reps = diff/summ;
+     if (reps < 8*DBL_EPSILON) {
+       *d = rd;
+       return 1;
+     }
+   }
+  }
+  return 0;
+}
+
+
+SWIGINTERN int
+SWIG_AsVal_long (PyObject *obj, long* val)
+{
+  if (PyInt_Check(obj)) {
+    if (val) *val = PyInt_AsLong(obj);
+    return SWIG_OK;
+  } else if (PyLong_Check(obj)) {
+    long v = PyLong_AsLong(obj);
+    if (!PyErr_Occurred()) {
+      if (val) *val = v;
+      return SWIG_OK;
+    } else {
+      PyErr_Clear();
+    }
+  }
+#ifdef SWIG_PYTHON_CAST_MODE
+  {
+    int dispatch = 0;
+    long v = PyInt_AsLong(obj);
+    if (!PyErr_Occurred()) {
+      if (val) *val = v;
+      return SWIG_AddCast(SWIG_OK);
+    } else {
+      PyErr_Clear();
+    }
+    if (!dispatch) {
+      double d;
+      int res = SWIG_AddCast(SWIG_AsVal_double (obj,&d));
+      if (SWIG_IsOK(res) && SWIG_CanCastAsInteger(&d, LONG_MIN, LONG_MAX)) {
+	if (val) *val = (long)(d);
+	return res;
+      }
+    }
+  }
+#endif
+  return SWIG_TypeError;
+}
+
+
+SWIGINTERN int
+SWIG_AsVal_int (PyObject * obj, int *val)
+{
+  long v;
+  int res = SWIG_AsVal_long (obj, &v);
+  if (SWIG_IsOK(res)) {
+    if ((v < INT_MIN || v > INT_MAX)) {
+      return SWIG_OverflowError;
+    } else {
+      if (val) *val = static_cast< int >(v);
+    }
+  }  
+  return res;
+}
+
+
+SWIGINTERNINLINE PyObject*
+  SWIG_From_int  (int value)
+{
+  return PyInt_FromLong((long) value);
+}
+
 #ifdef __cplusplus
 extern "C" {
 #endif
@@ -3209,6 +3323,110 @@ SWIGINTERN PyObject *GenericFunction_swigregister(PyObject *SWIGUNUSEDPARM(self)
   PyObject *obj;
   if (!PyArg_ParseTuple(args,(char*)"O:swigregister", &obj)) return NULL;
   SWIG_TypeNewClientData(SWIGTYPE_p_Angpow__GenericFunction, SWIG_NewClientData(obj));
+  return SWIG_Py_Void();
+}
+
+SWIGINTERN PyObject *_wrap_ClassFunc1D___call__(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
+  PyObject *resultobj = 0;
+  Angpow::ClassFunc1D *arg1 = (Angpow::ClassFunc1D *) 0 ;
+  double arg2 ;
+  void *argp1 = 0 ;
+  int res1 = 0 ;
+  double val2 ;
+  int ecode2 = 0 ;
+  PyObject * obj0 = 0 ;
+  PyObject * obj1 = 0 ;
+  double result;
+  
+  if (!PyArg_ParseTuple(args,(char *)"OO:ClassFunc1D___call__",&obj0,&obj1)) SWIG_fail;
+  res1 = SWIG_ConvertPtr(obj0, &argp1,SWIGTYPE_p_Angpow__ClassFunc1D, 0 |  0 );
+  if (!SWIG_IsOK(res1)) {
+    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "ClassFunc1D___call__" "', argument " "1"" of type '" "Angpow::ClassFunc1D const *""'"); 
+  }
+  arg1 = reinterpret_cast< Angpow::ClassFunc1D * >(argp1);
+  ecode2 = SWIG_AsVal_double(obj1, &val2);
+  if (!SWIG_IsOK(ecode2)) {
+    SWIG_exception_fail(SWIG_ArgError(ecode2), "in method '" "ClassFunc1D___call__" "', argument " "2"" of type '" "double""'");
+  } 
+  arg2 = static_cast< double >(val2);
+  result = (double)((Angpow::ClassFunc1D const *)arg1)->operator ()(arg2);
+  resultobj = SWIG_From_double(static_cast< double >(result));
+  return resultobj;
+fail:
+  return NULL;
+}
+
+
+SWIGINTERN PyObject *_wrap_ClassFunc1D_getValues(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
+  PyObject *resultobj = 0;
+  Angpow::ClassFunc1D *arg1 = (Angpow::ClassFunc1D *) 0 ;
+  std::vector< double > *arg2 = 0 ;
+  std::vector< double > *arg3 = 0 ;
+  void *argp1 = 0 ;
+  int res1 = 0 ;
+  void *argp2 = 0 ;
+  int res2 = 0 ;
+  void *argp3 = 0 ;
+  int res3 = 0 ;
+  PyObject * obj0 = 0 ;
+  PyObject * obj1 = 0 ;
+  PyObject * obj2 = 0 ;
+  
+  if (!PyArg_ParseTuple(args,(char *)"OOO:ClassFunc1D_getValues",&obj0,&obj1,&obj2)) SWIG_fail;
+  res1 = SWIG_ConvertPtr(obj0, &argp1,SWIGTYPE_p_Angpow__ClassFunc1D, 0 |  0 );
+  if (!SWIG_IsOK(res1)) {
+    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "ClassFunc1D_getValues" "', argument " "1"" of type '" "Angpow::ClassFunc1D const *""'"); 
+  }
+  arg1 = reinterpret_cast< Angpow::ClassFunc1D * >(argp1);
+  res2 = SWIG_ConvertPtr(obj1, &argp2, SWIGTYPE_p_std__vectorT_double_t,  0  | 0);
+  if (!SWIG_IsOK(res2)) {
+    SWIG_exception_fail(SWIG_ArgError(res2), "in method '" "ClassFunc1D_getValues" "', argument " "2"" of type '" "std::vector< double > const &""'"); 
+  }
+  if (!argp2) {
+    SWIG_exception_fail(SWIG_ValueError, "invalid null reference " "in method '" "ClassFunc1D_getValues" "', argument " "2"" of type '" "std::vector< double > const &""'"); 
+  }
+  arg2 = reinterpret_cast< std::vector< double > * >(argp2);
+  res3 = SWIG_ConvertPtr(obj2, &argp3, SWIGTYPE_p_std__vectorT_double_t,  0 );
+  if (!SWIG_IsOK(res3)) {
+    SWIG_exception_fail(SWIG_ArgError(res3), "in method '" "ClassFunc1D_getValues" "', argument " "3"" of type '" "std::vector< double > &""'"); 
+  }
+  if (!argp3) {
+    SWIG_exception_fail(SWIG_ValueError, "invalid null reference " "in method '" "ClassFunc1D_getValues" "', argument " "3"" of type '" "std::vector< double > &""'"); 
+  }
+  arg3 = reinterpret_cast< std::vector< double > * >(argp3);
+  ((Angpow::ClassFunc1D const *)arg1)->getValues((std::vector< double > const &)*arg2,*arg3);
+  resultobj = SWIG_Py_Void();
+  return resultobj;
+fail:
+  return NULL;
+}
+
+
+SWIGINTERN PyObject *_wrap_delete_ClassFunc1D(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
+  PyObject *resultobj = 0;
+  Angpow::ClassFunc1D *arg1 = (Angpow::ClassFunc1D *) 0 ;
+  void *argp1 = 0 ;
+  int res1 = 0 ;
+  PyObject * obj0 = 0 ;
+  
+  if (!PyArg_ParseTuple(args,(char *)"O:delete_ClassFunc1D",&obj0)) SWIG_fail;
+  res1 = SWIG_ConvertPtr(obj0, &argp1,SWIGTYPE_p_Angpow__ClassFunc1D, SWIG_POINTER_DISOWN |  0 );
+  if (!SWIG_IsOK(res1)) {
+    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "delete_ClassFunc1D" "', argument " "1"" of type '" "Angpow::ClassFunc1D *""'"); 
+  }
+  arg1 = reinterpret_cast< Angpow::ClassFunc1D * >(argp1);
+  delete arg1;
+  resultobj = SWIG_Py_Void();
+  return resultobj;
+fail:
+  return NULL;
+}
+
+
+SWIGINTERN PyObject *ClassFunc1D_swigregister(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
+  PyObject *obj;
+  if (!PyArg_ParseTuple(args,(char*)"O:swigregister", &obj)) return NULL;
+  SWIG_TypeNewClientData(SWIGTYPE_p_Angpow__ClassFunc1D, SWIG_NewClientData(obj));
   return SWIG_Py_Void();
 }
 
@@ -3381,6 +3599,345 @@ SWIGINTERN PyObject *Function2D_swigregister(PyObject *SWIGUNUSEDPARM(self), PyO
   return SWIG_Py_Void();
 }
 
+SWIGINTERN PyObject *_wrap_new_CheFunc(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
+  PyObject *resultobj = 0;
+  Angpow::ClassFunc1D *arg1 = (Angpow::ClassFunc1D *) 0 ;
+  int arg2 ;
+  void *argp1 = 0 ;
+  int res1 = 0 ;
+  int val2 ;
+  int ecode2 = 0 ;
+  PyObject * obj0 = 0 ;
+  PyObject * obj1 = 0 ;
+  Angpow::CheFunc *result = 0 ;
+  
+  if (!PyArg_ParseTuple(args,(char *)"OO:new_CheFunc",&obj0,&obj1)) SWIG_fail;
+  res1 = SWIG_ConvertPtr(obj0, &argp1,SWIGTYPE_p_Angpow__ClassFunc1D, 0 |  0 );
+  if (!SWIG_IsOK(res1)) {
+    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "new_CheFunc" "', argument " "1"" of type '" "Angpow::ClassFunc1D *""'"); 
+  }
+  arg1 = reinterpret_cast< Angpow::ClassFunc1D * >(argp1);
+  ecode2 = SWIG_AsVal_int(obj1, &val2);
+  if (!SWIG_IsOK(ecode2)) {
+    SWIG_exception_fail(SWIG_ArgError(ecode2), "in method '" "new_CheFunc" "', argument " "2"" of type '" "int""'");
+  } 
+  arg2 = static_cast< int >(val2);
+  result = (Angpow::CheFunc *)new Angpow::CheFunc(arg1,arg2);
+  resultobj = SWIG_NewPointerObj(SWIG_as_voidptr(result), SWIGTYPE_p_Angpow__CheFunc, SWIG_POINTER_NEW |  0 );
+  return resultobj;
+fail:
+  return NULL;
+}
+
+
+SWIGINTERN PyObject *_wrap_delete_CheFunc(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
+  PyObject *resultobj = 0;
+  Angpow::CheFunc *arg1 = (Angpow::CheFunc *) 0 ;
+  void *argp1 = 0 ;
+  int res1 = 0 ;
+  PyObject * obj0 = 0 ;
+  
+  if (!PyArg_ParseTuple(args,(char *)"O:delete_CheFunc",&obj0)) SWIG_fail;
+  res1 = SWIG_ConvertPtr(obj0, &argp1,SWIGTYPE_p_Angpow__CheFunc, SWIG_POINTER_DISOWN |  0 );
+  if (!SWIG_IsOK(res1)) {
+    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "delete_CheFunc" "', argument " "1"" of type '" "Angpow::CheFunc *""'"); 
+  }
+  arg1 = reinterpret_cast< Angpow::CheFunc * >(argp1);
+  delete arg1;
+  resultobj = SWIG_Py_Void();
+  return resultobj;
+fail:
+  return NULL;
+}
+
+
+SWIGINTERN PyObject *_wrap_CheFunc_orderFunc(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
+  PyObject *resultobj = 0;
+  Angpow::CheFunc *arg1 = (Angpow::CheFunc *) 0 ;
+  void *argp1 = 0 ;
+  int res1 = 0 ;
+  PyObject * obj0 = 0 ;
+  int result;
+  
+  if (!PyArg_ParseTuple(args,(char *)"O:CheFunc_orderFunc",&obj0)) SWIG_fail;
+  res1 = SWIG_ConvertPtr(obj0, &argp1,SWIGTYPE_p_Angpow__CheFunc, 0 |  0 );
+  if (!SWIG_IsOK(res1)) {
+    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "CheFunc_orderFunc" "', argument " "1"" of type '" "Angpow::CheFunc *""'"); 
+  }
+  arg1 = reinterpret_cast< Angpow::CheFunc * >(argp1);
+  result = (int)(arg1)->orderFunc();
+  resultobj = SWIG_From_int(static_cast< int >(result));
+  return resultobj;
+fail:
+  return NULL;
+}
+
+
+SWIGINTERN PyObject *_wrap_CheFunc___call__(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
+  PyObject *resultobj = 0;
+  Angpow::CheFunc *arg1 = (Angpow::CheFunc *) 0 ;
+  r_8 arg2 ;
+  void *argp1 = 0 ;
+  int res1 = 0 ;
+  void *argp2 ;
+  int res2 = 0 ;
+  PyObject * obj0 = 0 ;
+  PyObject * obj1 = 0 ;
+  r_8 result;
+  
+  if (!PyArg_ParseTuple(args,(char *)"OO:CheFunc___call__",&obj0,&obj1)) SWIG_fail;
+  res1 = SWIG_ConvertPtr(obj0, &argp1,SWIGTYPE_p_Angpow__CheFunc, 0 |  0 );
+  if (!SWIG_IsOK(res1)) {
+    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "CheFunc___call__" "', argument " "1"" of type '" "Angpow::CheFunc const *""'"); 
+  }
+  arg1 = reinterpret_cast< Angpow::CheFunc * >(argp1);
+  {
+    res2 = SWIG_ConvertPtr(obj1, &argp2, SWIGTYPE_p_r_8,  0  | 0);
+    if (!SWIG_IsOK(res2)) {
+      SWIG_exception_fail(SWIG_ArgError(res2), "in method '" "CheFunc___call__" "', argument " "2"" of type '" "r_8""'"); 
+    }  
+    if (!argp2) {
+      SWIG_exception_fail(SWIG_ValueError, "invalid null reference " "in method '" "CheFunc___call__" "', argument " "2"" of type '" "r_8""'");
+    } else {
+      r_8 * temp = reinterpret_cast< r_8 * >(argp2);
+      arg2 = *temp;
+      if (SWIG_IsNewObj(res2)) delete temp;
+    }
+  }
+  result = ((Angpow::CheFunc const *)arg1)->operator ()(arg2);
+  resultobj = SWIG_NewPointerObj((new r_8(static_cast< const r_8& >(result))), SWIGTYPE_p_r_8, SWIG_POINTER_OWN |  0 );
+  return resultobj;
+fail:
+  return NULL;
+}
+
+
+SWIGINTERN PyObject *_wrap_CheFunc_ChebyshevCoeffFFT(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
+  PyObject *resultobj = 0;
+  Angpow::CheFunc *arg1 = (Angpow::CheFunc *) 0 ;
+  void *argp1 = 0 ;
+  int res1 = 0 ;
+  PyObject * obj0 = 0 ;
+  
+  if (!PyArg_ParseTuple(args,(char *)"O:CheFunc_ChebyshevCoeffFFT",&obj0)) SWIG_fail;
+  res1 = SWIG_ConvertPtr(obj0, &argp1,SWIGTYPE_p_Angpow__CheFunc, 0 |  0 );
+  if (!SWIG_IsOK(res1)) {
+    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "CheFunc_ChebyshevCoeffFFT" "', argument " "1"" of type '" "Angpow::CheFunc *""'"); 
+  }
+  arg1 = reinterpret_cast< Angpow::CheFunc * >(argp1);
+  (arg1)->ChebyshevCoeffFFT();
+  resultobj = SWIG_Py_Void();
+  return resultobj;
+fail:
+  return NULL;
+}
+
+
+SWIGINTERN PyObject *_wrap_CheFunc_ChebyshevTransform(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
+  PyObject *resultobj = 0;
+  Angpow::CheFunc *arg1 = (Angpow::CheFunc *) 0 ;
+  r_8 arg2 ;
+  r_8 arg3 ;
+  void *argp1 = 0 ;
+  int res1 = 0 ;
+  void *argp2 ;
+  int res2 = 0 ;
+  void *argp3 ;
+  int res3 = 0 ;
+  PyObject * obj0 = 0 ;
+  PyObject * obj1 = 0 ;
+  PyObject * obj2 = 0 ;
+  
+  if (!PyArg_ParseTuple(args,(char *)"OOO:CheFunc_ChebyshevTransform",&obj0,&obj1,&obj2)) SWIG_fail;
+  res1 = SWIG_ConvertPtr(obj0, &argp1,SWIGTYPE_p_Angpow__CheFunc, 0 |  0 );
+  if (!SWIG_IsOK(res1)) {
+    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "CheFunc_ChebyshevTransform" "', argument " "1"" of type '" "Angpow::CheFunc *""'"); 
+  }
+  arg1 = reinterpret_cast< Angpow::CheFunc * >(argp1);
+  {
+    res2 = SWIG_ConvertPtr(obj1, &argp2, SWIGTYPE_p_r_8,  0  | 0);
+    if (!SWIG_IsOK(res2)) {
+      SWIG_exception_fail(SWIG_ArgError(res2), "in method '" "CheFunc_ChebyshevTransform" "', argument " "2"" of type '" "r_8""'"); 
+    }  
+    if (!argp2) {
+      SWIG_exception_fail(SWIG_ValueError, "invalid null reference " "in method '" "CheFunc_ChebyshevTransform" "', argument " "2"" of type '" "r_8""'");
+    } else {
+      r_8 * temp = reinterpret_cast< r_8 * >(argp2);
+      arg2 = *temp;
+      if (SWIG_IsNewObj(res2)) delete temp;
+    }
+  }
+  {
+    res3 = SWIG_ConvertPtr(obj2, &argp3, SWIGTYPE_p_r_8,  0  | 0);
+    if (!SWIG_IsOK(res3)) {
+      SWIG_exception_fail(SWIG_ArgError(res3), "in method '" "CheFunc_ChebyshevTransform" "', argument " "3"" of type '" "r_8""'"); 
+    }  
+    if (!argp3) {
+      SWIG_exception_fail(SWIG_ValueError, "invalid null reference " "in method '" "CheFunc_ChebyshevTransform" "', argument " "3"" of type '" "r_8""'");
+    } else {
+      r_8 * temp = reinterpret_cast< r_8 * >(argp3);
+      arg3 = *temp;
+      if (SWIG_IsNewObj(res3)) delete temp;
+    }
+  }
+  (arg1)->ChebyshevTransform(arg2,arg3);
+  resultobj = SWIG_Py_Void();
+  return resultobj;
+fail:
+  return NULL;
+}
+
+
+SWIGINTERN PyObject *CheFunc_swigregister(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
+  PyObject *obj;
+  if (!PyArg_ParseTuple(args,(char*)"O:swigregister", &obj)) return NULL;
+  SWIG_TypeNewClientData(SWIGTYPE_p_Angpow__CheFunc, SWIG_NewClientData(obj));
+  return SWIG_Py_Void();
+}
+
+SWIGINTERN PyObject *_wrap_new_CheAlgo(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
+  PyObject *resultobj = 0;
+  SwigValueWrapper< std::vector< Angpow::CheFunc * > > arg1 ;
+  void *argp1 ;
+  int res1 = 0 ;
+  PyObject * obj0 = 0 ;
+  Angpow::CheAlgo *result = 0 ;
+  
+  if (!PyArg_ParseTuple(args,(char *)"O:new_CheAlgo",&obj0)) SWIG_fail;
+  {
+    res1 = SWIG_ConvertPtr(obj0, &argp1, SWIGTYPE_p_std__vectorT_Angpow__CheFunc_p_t,  0  | 0);
+    if (!SWIG_IsOK(res1)) {
+      SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "new_CheAlgo" "', argument " "1"" of type '" "std::vector< Angpow::CheFunc * >""'"); 
+    }  
+    if (!argp1) {
+      SWIG_exception_fail(SWIG_ValueError, "invalid null reference " "in method '" "new_CheAlgo" "', argument " "1"" of type '" "std::vector< Angpow::CheFunc * >""'");
+    } else {
+      std::vector< Angpow::CheFunc * > * temp = reinterpret_cast< std::vector< Angpow::CheFunc * > * >(argp1);
+      arg1 = *temp;
+      if (SWIG_IsNewObj(res1)) delete temp;
+    }
+  }
+  result = (Angpow::CheAlgo *)new Angpow::CheAlgo(arg1);
+  resultobj = SWIG_NewPointerObj(SWIG_as_voidptr(result), SWIGTYPE_p_Angpow__CheAlgo, SWIG_POINTER_NEW |  0 );
+  return resultobj;
+fail:
+  return NULL;
+}
+
+
+SWIGINTERN PyObject *_wrap_delete_CheAlgo(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
+  PyObject *resultobj = 0;
+  Angpow::CheAlgo *arg1 = (Angpow::CheAlgo *) 0 ;
+  void *argp1 = 0 ;
+  int res1 = 0 ;
+  PyObject * obj0 = 0 ;
+  
+  if (!PyArg_ParseTuple(args,(char *)"O:delete_CheAlgo",&obj0)) SWIG_fail;
+  res1 = SWIG_ConvertPtr(obj0, &argp1,SWIGTYPE_p_Angpow__CheAlgo, SWIG_POINTER_DISOWN |  0 );
+  if (!SWIG_IsOK(res1)) {
+    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "delete_CheAlgo" "', argument " "1"" of type '" "Angpow::CheAlgo *""'"); 
+  }
+  arg1 = reinterpret_cast< Angpow::CheAlgo * >(argp1);
+  delete arg1;
+  resultobj = SWIG_Py_Void();
+  return resultobj;
+fail:
+  return NULL;
+}
+
+
+SWIGINTERN PyObject *_wrap_CheAlgo_ClenshawCurtisWeightsFast(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
+  PyObject *resultobj = 0;
+  Angpow::CheAlgo *arg1 = (Angpow::CheAlgo *) 0 ;
+  void *argp1 = 0 ;
+  int res1 = 0 ;
+  PyObject * obj0 = 0 ;
+  
+  if (!PyArg_ParseTuple(args,(char *)"O:CheAlgo_ClenshawCurtisWeightsFast",&obj0)) SWIG_fail;
+  res1 = SWIG_ConvertPtr(obj0, &argp1,SWIGTYPE_p_Angpow__CheAlgo, 0 |  0 );
+  if (!SWIG_IsOK(res1)) {
+    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "CheAlgo_ClenshawCurtisWeightsFast" "', argument " "1"" of type '" "Angpow::CheAlgo *""'"); 
+  }
+  arg1 = reinterpret_cast< Angpow::CheAlgo * >(argp1);
+  (arg1)->ClenshawCurtisWeightsFast();
+  resultobj = SWIG_Py_Void();
+  return resultobj;
+fail:
+  return NULL;
+}
+
+
+SWIGINTERN PyObject *_wrap_CheAlgo_InverseChebyshevCoeffFFT(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
+  PyObject *resultobj = 0;
+  Angpow::CheAlgo *arg1 = (Angpow::CheAlgo *) 0 ;
+  void *argp1 = 0 ;
+  int res1 = 0 ;
+  PyObject * obj0 = 0 ;
+  
+  if (!PyArg_ParseTuple(args,(char *)"O:CheAlgo_InverseChebyshevCoeffFFT",&obj0)) SWIG_fail;
+  res1 = SWIG_ConvertPtr(obj0, &argp1,SWIGTYPE_p_Angpow__CheAlgo, 0 |  0 );
+  if (!SWIG_IsOK(res1)) {
+    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "CheAlgo_InverseChebyshevCoeffFFT" "', argument " "1"" of type '" "Angpow::CheAlgo *""'"); 
+  }
+  arg1 = reinterpret_cast< Angpow::CheAlgo * >(argp1);
+  (arg1)->InverseChebyshevCoeffFFT();
+  resultobj = SWIG_Py_Void();
+  return resultobj;
+fail:
+  return NULL;
+}
+
+
+SWIGINTERN PyObject *_wrap_CheAlgo_InverseChebyshevTransform(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
+  PyObject *resultobj = 0;
+  Angpow::CheAlgo *arg1 = (Angpow::CheAlgo *) 0 ;
+  void *argp1 = 0 ;
+  int res1 = 0 ;
+  PyObject * obj0 = 0 ;
+  
+  if (!PyArg_ParseTuple(args,(char *)"O:CheAlgo_InverseChebyshevTransform",&obj0)) SWIG_fail;
+  res1 = SWIG_ConvertPtr(obj0, &argp1,SWIGTYPE_p_Angpow__CheAlgo, 0 |  0 );
+  if (!SWIG_IsOK(res1)) {
+    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "CheAlgo_InverseChebyshevTransform" "', argument " "1"" of type '" "Angpow::CheAlgo *""'"); 
+  }
+  arg1 = reinterpret_cast< Angpow::CheAlgo * >(argp1);
+  (arg1)->InverseChebyshevTransform();
+  resultobj = SWIG_Py_Void();
+  return resultobj;
+fail:
+  return NULL;
+}
+
+
+SWIGINTERN PyObject *_wrap_CheAlgo_ComputeIntegralUnscaled(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
+  PyObject *resultobj = 0;
+  Angpow::CheAlgo *arg1 = (Angpow::CheAlgo *) 0 ;
+  void *argp1 = 0 ;
+  int res1 = 0 ;
+  PyObject * obj0 = 0 ;
+  r_8 result;
+  
+  if (!PyArg_ParseTuple(args,(char *)"O:CheAlgo_ComputeIntegralUnscaled",&obj0)) SWIG_fail;
+  res1 = SWIG_ConvertPtr(obj0, &argp1,SWIGTYPE_p_Angpow__CheAlgo, 0 |  0 );
+  if (!SWIG_IsOK(res1)) {
+    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "CheAlgo_ComputeIntegralUnscaled" "', argument " "1"" of type '" "Angpow::CheAlgo *""'"); 
+  }
+  arg1 = reinterpret_cast< Angpow::CheAlgo * >(argp1);
+  result = (arg1)->ComputeIntegralUnscaled();
+  resultobj = SWIG_NewPointerObj((new r_8(static_cast< const r_8& >(result))), SWIGTYPE_p_r_8, SWIG_POINTER_OWN |  0 );
+  return resultobj;
+fail:
+  return NULL;
+}
+
+
+SWIGINTERN PyObject *CheAlgo_swigregister(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
+  PyObject *obj;
+  if (!PyArg_ParseTuple(args,(char*)"O:swigregister", &obj)) return NULL;
+  SWIG_TypeNewClientData(SWIGTYPE_p_Angpow__CheAlgo, SWIG_NewClientData(obj));
+  return SWIG_Py_Void();
+}
+
 static PyMethodDef SwigMethods[] = {
 	 { (char *)"SWIG_PyInstanceMethod_New", (PyCFunction)SWIG_PyInstanceMethod_New, METH_O, NULL},
 	 { (char *)"new_wallTimer", _wrap_new_wallTimer, METH_VARARGS, NULL},
@@ -3391,6 +3948,10 @@ static PyMethodDef SwigMethods[] = {
 	 { (char *)"new_GenericFunction", _wrap_new_GenericFunction, METH_VARARGS, NULL},
 	 { (char *)"delete_GenericFunction", _wrap_delete_GenericFunction, METH_VARARGS, NULL},
 	 { (char *)"GenericFunction_swigregister", GenericFunction_swigregister, METH_VARARGS, NULL},
+	 { (char *)"ClassFunc1D___call__", _wrap_ClassFunc1D___call__, METH_VARARGS, NULL},
+	 { (char *)"ClassFunc1D_getValues", _wrap_ClassFunc1D_getValues, METH_VARARGS, NULL},
+	 { (char *)"delete_ClassFunc1D", _wrap_delete_ClassFunc1D, METH_VARARGS, NULL},
+	 { (char *)"ClassFunc1D_swigregister", ClassFunc1D_swigregister, METH_VARARGS, NULL},
 	 { (char *)"new_Function1D", _wrap_new_Function1D, METH_VARARGS, NULL},
 	 { (char *)"Function1D___call__", _wrap_Function1D___call__, METH_VARARGS, NULL},
 	 { (char *)"delete_Function1D", _wrap_delete_Function1D, METH_VARARGS, NULL},
@@ -3399,45 +3960,86 @@ static PyMethodDef SwigMethods[] = {
 	 { (char *)"Function2D___call__", _wrap_Function2D___call__, METH_VARARGS, NULL},
 	 { (char *)"delete_Function2D", _wrap_delete_Function2D, METH_VARARGS, NULL},
 	 { (char *)"Function2D_swigregister", Function2D_swigregister, METH_VARARGS, NULL},
+	 { (char *)"new_CheFunc", _wrap_new_CheFunc, METH_VARARGS, NULL},
+	 { (char *)"delete_CheFunc", _wrap_delete_CheFunc, METH_VARARGS, NULL},
+	 { (char *)"CheFunc_orderFunc", _wrap_CheFunc_orderFunc, METH_VARARGS, NULL},
+	 { (char *)"CheFunc___call__", _wrap_CheFunc___call__, METH_VARARGS, NULL},
+	 { (char *)"CheFunc_ChebyshevCoeffFFT", _wrap_CheFunc_ChebyshevCoeffFFT, METH_VARARGS, NULL},
+	 { (char *)"CheFunc_ChebyshevTransform", _wrap_CheFunc_ChebyshevTransform, METH_VARARGS, NULL},
+	 { (char *)"CheFunc_swigregister", CheFunc_swigregister, METH_VARARGS, NULL},
+	 { (char *)"new_CheAlgo", _wrap_new_CheAlgo, METH_VARARGS, NULL},
+	 { (char *)"delete_CheAlgo", _wrap_delete_CheAlgo, METH_VARARGS, NULL},
+	 { (char *)"CheAlgo_ClenshawCurtisWeightsFast", _wrap_CheAlgo_ClenshawCurtisWeightsFast, METH_VARARGS, NULL},
+	 { (char *)"CheAlgo_InverseChebyshevCoeffFFT", _wrap_CheAlgo_InverseChebyshevCoeffFFT, METH_VARARGS, NULL},
+	 { (char *)"CheAlgo_InverseChebyshevTransform", _wrap_CheAlgo_InverseChebyshevTransform, METH_VARARGS, NULL},
+	 { (char *)"CheAlgo_ComputeIntegralUnscaled", _wrap_CheAlgo_ComputeIntegralUnscaled, METH_VARARGS, NULL},
+	 { (char *)"CheAlgo_swigregister", CheAlgo_swigregister, METH_VARARGS, NULL},
 	 { NULL, NULL, 0, NULL }
 };
 
 
 /* -------- TYPE CONVERSION AND EQUIVALENCE RULES (BEGIN) -------- */
 
+static void *_p_Angpow__ClassFunc1DTo_p_Angpow__GenericFunction(void *x, int *SWIGUNUSEDPARM(newmemory)) {
+    return (void *)((Angpow::GenericFunction *)  ((Angpow::ClassFunc1D *) x));
+}
+static swig_type_info _swigt__p_Angpow__CheAlgo = {"_p_Angpow__CheAlgo", "Angpow::CheAlgo *", 0, 0, (void*)0, 0};
+static swig_type_info _swigt__p_Angpow__CheFunc = {"_p_Angpow__CheFunc", "Angpow::CheFunc *", 0, 0, (void*)0, 0};
+static swig_type_info _swigt__p_Angpow__ClassFunc1D = {"_p_Angpow__ClassFunc1D", "Angpow::ClassFunc1D *", 0, 0, (void*)0, 0};
 static swig_type_info _swigt__p_Angpow__Function1D = {"_p_Angpow__Function1D", "Angpow::Function1D *", 0, 0, (void*)0, 0};
 static swig_type_info _swigt__p_Angpow__Function2D = {"_p_Angpow__Function2D", "Angpow::Function2D *", 0, 0, (void*)0, 0};
 static swig_type_info _swigt__p_Angpow__GenericFunction = {"_p_Angpow__GenericFunction", "Angpow::GenericFunction *", 0, 0, (void*)0, 0};
 static swig_type_info _swigt__p_char = {"_p_char", "char *", 0, 0, (void*)0, 0};
 static swig_type_info _swigt__p_f_double__double = {"_p_f_double__double", "double (*)(double)", 0, 0, (void*)0, 0};
 static swig_type_info _swigt__p_f_double_double__double = {"_p_f_double_double__double", "double (*)(double,double)", 0, 0, (void*)0, 0};
+static swig_type_info _swigt__p_r_8 = {"_p_r_8", "r_8 *", 0, 0, (void*)0, 0};
+static swig_type_info _swigt__p_std__vectorT_Angpow__CheFunc_p_t = {"_p_std__vectorT_Angpow__CheFunc_p_t", "std::vector< Angpow::CheFunc * > *", 0, 0, (void*)0, 0};
+static swig_type_info _swigt__p_std__vectorT_double_t = {"_p_std__vectorT_double_t", "std::vector< double > *", 0, 0, (void*)0, 0};
 static swig_type_info _swigt__p_wallTimer = {"_p_wallTimer", "wallTimer *", 0, 0, (void*)0, 0};
 
 static swig_type_info *swig_type_initial[] = {
+  &_swigt__p_Angpow__CheAlgo,
+  &_swigt__p_Angpow__CheFunc,
+  &_swigt__p_Angpow__ClassFunc1D,
   &_swigt__p_Angpow__Function1D,
   &_swigt__p_Angpow__Function2D,
   &_swigt__p_Angpow__GenericFunction,
   &_swigt__p_char,
   &_swigt__p_f_double__double,
   &_swigt__p_f_double_double__double,
+  &_swigt__p_r_8,
+  &_swigt__p_std__vectorT_Angpow__CheFunc_p_t,
+  &_swigt__p_std__vectorT_double_t,
   &_swigt__p_wallTimer,
 };
 
+static swig_cast_info _swigc__p_Angpow__CheAlgo[] = {  {&_swigt__p_Angpow__CheAlgo, 0, 0, 0},{0, 0, 0, 0}};
+static swig_cast_info _swigc__p_Angpow__CheFunc[] = {  {&_swigt__p_Angpow__CheFunc, 0, 0, 0},{0, 0, 0, 0}};
+static swig_cast_info _swigc__p_Angpow__ClassFunc1D[] = {  {&_swigt__p_Angpow__ClassFunc1D, 0, 0, 0},{0, 0, 0, 0}};
 static swig_cast_info _swigc__p_Angpow__Function1D[] = {  {&_swigt__p_Angpow__Function1D, 0, 0, 0},{0, 0, 0, 0}};
 static swig_cast_info _swigc__p_Angpow__Function2D[] = {  {&_swigt__p_Angpow__Function2D, 0, 0, 0},{0, 0, 0, 0}};
-static swig_cast_info _swigc__p_Angpow__GenericFunction[] = {  {&_swigt__p_Angpow__GenericFunction, 0, 0, 0},{0, 0, 0, 0}};
+static swig_cast_info _swigc__p_Angpow__GenericFunction[] = {  {&_swigt__p_Angpow__GenericFunction, 0, 0, 0},  {&_swigt__p_Angpow__ClassFunc1D, _p_Angpow__ClassFunc1DTo_p_Angpow__GenericFunction, 0, 0},{0, 0, 0, 0}};
 static swig_cast_info _swigc__p_char[] = {  {&_swigt__p_char, 0, 0, 0},{0, 0, 0, 0}};
 static swig_cast_info _swigc__p_f_double__double[] = {  {&_swigt__p_f_double__double, 0, 0, 0},{0, 0, 0, 0}};
 static swig_cast_info _swigc__p_f_double_double__double[] = {  {&_swigt__p_f_double_double__double, 0, 0, 0},{0, 0, 0, 0}};
+static swig_cast_info _swigc__p_r_8[] = {  {&_swigt__p_r_8, 0, 0, 0},{0, 0, 0, 0}};
+static swig_cast_info _swigc__p_std__vectorT_Angpow__CheFunc_p_t[] = {  {&_swigt__p_std__vectorT_Angpow__CheFunc_p_t, 0, 0, 0},{0, 0, 0, 0}};
+static swig_cast_info _swigc__p_std__vectorT_double_t[] = {  {&_swigt__p_std__vectorT_double_t, 0, 0, 0},{0, 0, 0, 0}};
 static swig_cast_info _swigc__p_wallTimer[] = {  {&_swigt__p_wallTimer, 0, 0, 0},{0, 0, 0, 0}};
 
 static swig_cast_info *swig_cast_initial[] = {
+  _swigc__p_Angpow__CheAlgo,
+  _swigc__p_Angpow__CheFunc,
+  _swigc__p_Angpow__ClassFunc1D,
   _swigc__p_Angpow__Function1D,
   _swigc__p_Angpow__Function2D,
   _swigc__p_Angpow__GenericFunction,
   _swigc__p_char,
   _swigc__p_f_double__double,
   _swigc__p_f_double_double__double,
+  _swigc__p_r_8,
+  _swigc__p_std__vectorT_Angpow__CheFunc_p_t,
+  _swigc__p_std__vectorT_double_t,
   _swigc__p_wallTimer,
 };
 
