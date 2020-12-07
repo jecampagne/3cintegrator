@@ -86,6 +86,53 @@ class wallTimer(_object):
 wallTimer_swigregister = Angpow_swig_py.wallTimer_swigregister
 wallTimer_swigregister(wallTimer)
 
+class GenericFunction(_object):
+    __swig_setmethods__ = {}
+    __setattr__ = lambda self, name, value: _swig_setattr(self, GenericFunction, name, value)
+    __swig_getmethods__ = {}
+    __getattr__ = lambda self, name: _swig_getattr(self, GenericFunction, name)
+    __repr__ = _swig_repr
+    def __init__(self): 
+        this = Angpow_swig_py.new_GenericFunction()
+        try: self.this.append(this)
+        except: self.this = this
+    __swig_destroy__ = Angpow_swig_py.delete_GenericFunction
+    __del__ = lambda self : None;
+GenericFunction_swigregister = Angpow_swig_py.GenericFunction_swigregister
+GenericFunction_swigregister(GenericFunction)
+
+class Function1D(_object):
+    __swig_setmethods__ = {}
+    __setattr__ = lambda self, name, value: _swig_setattr(self, Function1D, name, value)
+    __swig_getmethods__ = {}
+    __getattr__ = lambda self, name: _swig_getattr(self, Function1D, name)
+    __repr__ = _swig_repr
+    def __init__(self, *args): 
+        this = Angpow_swig_py.new_Function1D(*args)
+        try: self.this.append(this)
+        except: self.this = this
+    def __call__(self, *args): return Angpow_swig_py.Function1D___call__(self, *args)
+    __swig_destroy__ = Angpow_swig_py.delete_Function1D
+    __del__ = lambda self : None;
+Function1D_swigregister = Angpow_swig_py.Function1D_swigregister
+Function1D_swigregister(Function1D)
+
+class Function2D(_object):
+    __swig_setmethods__ = {}
+    __setattr__ = lambda self, name, value: _swig_setattr(self, Function2D, name, value)
+    __swig_getmethods__ = {}
+    __getattr__ = lambda self, name: _swig_getattr(self, Function2D, name)
+    __repr__ = _swig_repr
+    def __init__(self, *args): 
+        this = Angpow_swig_py.new_Function2D(*args)
+        try: self.this.append(this)
+        except: self.this = this
+    def __call__(self, *args): return Angpow_swig_py.Function2D___call__(self, *args)
+    __swig_destroy__ = Angpow_swig_py.delete_Function2D
+    __del__ = lambda self : None;
+Function2D_swigregister = Angpow_swig_py.Function2D_swigregister
+Function2D_swigregister(Function2D)
+
 # This file is compatible with both classic and new-style classes.
 
 
