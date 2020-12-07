@@ -111,43 +111,10 @@ class ClassFunc1D(GenericFunction):
     def __init__(self, *args, **kwargs): raise AttributeError("No constructor defined - class is abstract")
     __repr__ = _swig_repr
     def __call__(self, *args): return Angpow_swig_py.ClassFunc1D___call__(self, *args)
-    def getValues(self, *args): return Angpow_swig_py.ClassFunc1D_getValues(self, *args)
     __swig_destroy__ = Angpow_swig_py.delete_ClassFunc1D
     __del__ = lambda self : None;
 ClassFunc1D_swigregister = Angpow_swig_py.ClassFunc1D_swigregister
 ClassFunc1D_swigregister(ClassFunc1D)
-
-class Function1D(_object):
-    __swig_setmethods__ = {}
-    __setattr__ = lambda self, name, value: _swig_setattr(self, Function1D, name, value)
-    __swig_getmethods__ = {}
-    __getattr__ = lambda self, name: _swig_getattr(self, Function1D, name)
-    __repr__ = _swig_repr
-    def __init__(self, *args): 
-        this = Angpow_swig_py.new_Function1D(*args)
-        try: self.this.append(this)
-        except: self.this = this
-    def __call__(self, *args): return Angpow_swig_py.Function1D___call__(self, *args)
-    __swig_destroy__ = Angpow_swig_py.delete_Function1D
-    __del__ = lambda self : None;
-Function1D_swigregister = Angpow_swig_py.Function1D_swigregister
-Function1D_swigregister(Function1D)
-
-class Function2D(_object):
-    __swig_setmethods__ = {}
-    __setattr__ = lambda self, name, value: _swig_setattr(self, Function2D, name, value)
-    __swig_getmethods__ = {}
-    __getattr__ = lambda self, name: _swig_getattr(self, Function2D, name)
-    __repr__ = _swig_repr
-    def __init__(self, *args): 
-        this = Angpow_swig_py.new_Function2D(*args)
-        try: self.this.append(this)
-        except: self.this = this
-    def __call__(self, *args): return Angpow_swig_py.Function2D___call__(self, *args)
-    __swig_destroy__ = Angpow_swig_py.delete_Function2D
-    __del__ = lambda self : None;
-Function2D_swigregister = Angpow_swig_py.Function2D_swigregister
-Function2D_swigregister(Function2D)
 
 class CheFunc(_object):
     __swig_setmethods__ = {}
@@ -186,6 +153,82 @@ class CheAlgo(_object):
     def ComputeIntegralUnscaled(self): return Angpow_swig_py.CheAlgo_ComputeIntegralUnscaled(self)
 CheAlgo_swigregister = Angpow_swig_py.CheAlgo_swigregister
 CheAlgo_swigregister(CheAlgo)
+
+class SwigPyIterator(_object):
+    __swig_setmethods__ = {}
+    __setattr__ = lambda self, name, value: _swig_setattr(self, SwigPyIterator, name, value)
+    __swig_getmethods__ = {}
+    __getattr__ = lambda self, name: _swig_getattr(self, SwigPyIterator, name)
+    def __init__(self, *args, **kwargs): raise AttributeError("No constructor defined - class is abstract")
+    __repr__ = _swig_repr
+    __swig_destroy__ = Angpow_swig_py.delete_SwigPyIterator
+    __del__ = lambda self : None;
+    def value(self): return Angpow_swig_py.SwigPyIterator_value(self)
+    def incr(self, n=1): return Angpow_swig_py.SwigPyIterator_incr(self, n)
+    def decr(self, n=1): return Angpow_swig_py.SwigPyIterator_decr(self, n)
+    def distance(self, *args): return Angpow_swig_py.SwigPyIterator_distance(self, *args)
+    def equal(self, *args): return Angpow_swig_py.SwigPyIterator_equal(self, *args)
+    def copy(self): return Angpow_swig_py.SwigPyIterator_copy(self)
+    def next(self): return Angpow_swig_py.SwigPyIterator_next(self)
+    def __next__(self): return Angpow_swig_py.SwigPyIterator___next__(self)
+    def previous(self): return Angpow_swig_py.SwigPyIterator_previous(self)
+    def advance(self, *args): return Angpow_swig_py.SwigPyIterator_advance(self, *args)
+    def __eq__(self, *args): return Angpow_swig_py.SwigPyIterator___eq__(self, *args)
+    def __ne__(self, *args): return Angpow_swig_py.SwigPyIterator___ne__(self, *args)
+    def __iadd__(self, *args): return Angpow_swig_py.SwigPyIterator___iadd__(self, *args)
+    def __isub__(self, *args): return Angpow_swig_py.SwigPyIterator___isub__(self, *args)
+    def __add__(self, *args): return Angpow_swig_py.SwigPyIterator___add__(self, *args)
+    def __sub__(self, *args): return Angpow_swig_py.SwigPyIterator___sub__(self, *args)
+    def __iter__(self): return self
+SwigPyIterator_swigregister = Angpow_swig_py.SwigPyIterator_swigregister
+SwigPyIterator_swigregister(SwigPyIterator)
+
+class std_vector_CheFunc(_object):
+    __swig_setmethods__ = {}
+    __setattr__ = lambda self, name, value: _swig_setattr(self, std_vector_CheFunc, name, value)
+    __swig_getmethods__ = {}
+    __getattr__ = lambda self, name: _swig_getattr(self, std_vector_CheFunc, name)
+    __repr__ = _swig_repr
+    def iterator(self): return Angpow_swig_py.std_vector_CheFunc_iterator(self)
+    def __iter__(self): return self.iterator()
+    def __nonzero__(self): return Angpow_swig_py.std_vector_CheFunc___nonzero__(self)
+    def __bool__(self): return Angpow_swig_py.std_vector_CheFunc___bool__(self)
+    def __len__(self): return Angpow_swig_py.std_vector_CheFunc___len__(self)
+    def pop(self): return Angpow_swig_py.std_vector_CheFunc_pop(self)
+    def __getslice__(self, *args): return Angpow_swig_py.std_vector_CheFunc___getslice__(self, *args)
+    def __setslice__(self, *args): return Angpow_swig_py.std_vector_CheFunc___setslice__(self, *args)
+    def __delslice__(self, *args): return Angpow_swig_py.std_vector_CheFunc___delslice__(self, *args)
+    def __delitem__(self, *args): return Angpow_swig_py.std_vector_CheFunc___delitem__(self, *args)
+    def __getitem__(self, *args): return Angpow_swig_py.std_vector_CheFunc___getitem__(self, *args)
+    def __setitem__(self, *args): return Angpow_swig_py.std_vector_CheFunc___setitem__(self, *args)
+    def append(self, *args): return Angpow_swig_py.std_vector_CheFunc_append(self, *args)
+    def empty(self): return Angpow_swig_py.std_vector_CheFunc_empty(self)
+    def size(self): return Angpow_swig_py.std_vector_CheFunc_size(self)
+    def clear(self): return Angpow_swig_py.std_vector_CheFunc_clear(self)
+    def swap(self, *args): return Angpow_swig_py.std_vector_CheFunc_swap(self, *args)
+    def get_allocator(self): return Angpow_swig_py.std_vector_CheFunc_get_allocator(self)
+    def begin(self): return Angpow_swig_py.std_vector_CheFunc_begin(self)
+    def end(self): return Angpow_swig_py.std_vector_CheFunc_end(self)
+    def rbegin(self): return Angpow_swig_py.std_vector_CheFunc_rbegin(self)
+    def rend(self): return Angpow_swig_py.std_vector_CheFunc_rend(self)
+    def pop_back(self): return Angpow_swig_py.std_vector_CheFunc_pop_back(self)
+    def erase(self, *args): return Angpow_swig_py.std_vector_CheFunc_erase(self, *args)
+    def __init__(self, *args): 
+        this = Angpow_swig_py.new_std_vector_CheFunc(*args)
+        try: self.this.append(this)
+        except: self.this = this
+    def push_back(self, *args): return Angpow_swig_py.std_vector_CheFunc_push_back(self, *args)
+    def front(self): return Angpow_swig_py.std_vector_CheFunc_front(self)
+    def back(self): return Angpow_swig_py.std_vector_CheFunc_back(self)
+    def assign(self, *args): return Angpow_swig_py.std_vector_CheFunc_assign(self, *args)
+    def resize(self, *args): return Angpow_swig_py.std_vector_CheFunc_resize(self, *args)
+    def insert(self, *args): return Angpow_swig_py.std_vector_CheFunc_insert(self, *args)
+    def reserve(self, *args): return Angpow_swig_py.std_vector_CheFunc_reserve(self, *args)
+    def capacity(self): return Angpow_swig_py.std_vector_CheFunc_capacity(self)
+    __swig_destroy__ = Angpow_swig_py.delete_std_vector_CheFunc
+    __del__ = lambda self : None;
+std_vector_CheFunc_swigregister = Angpow_swig_py.std_vector_CheFunc_swigregister
+std_vector_CheFunc_swigregister(std_vector_CheFunc)
 
 # This file is compatible with both classic and new-style classes.
 
