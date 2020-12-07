@@ -11,7 +11,11 @@ import math
 class FuncType1(Angpow.ClassFunc1D):
   m_ell = 0
   m_R = 0
+  #def __init__(self):
+  #  self.m_ell = 0
+  #  self.m_R = 0
   def __init__(self,a_ell,a_R):
+    #Angpow.ClassFunc1D()
     self.m_ell = a_ell
     self.m_R = a_R
   def get_value(self,a_x):
@@ -35,6 +39,7 @@ def test0():
   iOrd2 = chebyshev_order_2
   
   farr = Angpow.std_vector_CheFunc()
+  #che_func_1 = Angpow.CheFunc(f1, iOrd1)
   #farr.push_back(Angpow.CheFunc(f1, iOrd1))
   #farr.push_back(Angpow.CheFunc(f2, iOrd2))
   farr.push_back(Angpow.CheFunc(f0, iOrd0))
