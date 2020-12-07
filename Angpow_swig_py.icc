@@ -2940,10 +2940,10 @@ SWIG_Python_NonDynamicSetAttr(PyObject *obj, PyObject *name, PyObject *value) {
 #define SWIGTYPE_p_Angpow__Function1D swig_types[3]
 #define SWIGTYPE_p_Angpow__Function2D swig_types[4]
 #define SWIGTYPE_p_Angpow__GenericFunction swig_types[5]
-#define SWIGTYPE_p_char swig_types[6]
-#define SWIGTYPE_p_f_double__double swig_types[7]
-#define SWIGTYPE_p_f_double_double__double swig_types[8]
-#define SWIGTYPE_p_r_8 swig_types[9]
+#define SWIGTYPE_p_Angpow__r_8 swig_types[6]
+#define SWIGTYPE_p_char swig_types[7]
+#define SWIGTYPE_p_f_double__double swig_types[8]
+#define SWIGTYPE_p_f_double_double__double swig_types[9]
 #define SWIGTYPE_p_std__vectorT_Angpow__CheFunc_p_t swig_types[10]
 #define SWIGTYPE_p_std__vectorT_double_t swig_types[11]
 #define SWIGTYPE_p_wallTimer swig_types[12]
@@ -3676,14 +3676,14 @@ fail:
 SWIGINTERN PyObject *_wrap_CheFunc___call__(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
   PyObject *resultobj = 0;
   Angpow::CheFunc *arg1 = (Angpow::CheFunc *) 0 ;
-  r_8 arg2 ;
+  Angpow::r_8 arg2 ;
   void *argp1 = 0 ;
   int res1 = 0 ;
   void *argp2 ;
   int res2 = 0 ;
   PyObject * obj0 = 0 ;
   PyObject * obj1 = 0 ;
-  r_8 result;
+  Angpow::r_8 result;
   
   if (!PyArg_ParseTuple(args,(char *)"OO:CheFunc___call__",&obj0,&obj1)) SWIG_fail;
   res1 = SWIG_ConvertPtr(obj0, &argp1,SWIGTYPE_p_Angpow__CheFunc, 0 |  0 );
@@ -3692,20 +3692,20 @@ SWIGINTERN PyObject *_wrap_CheFunc___call__(PyObject *SWIGUNUSEDPARM(self), PyOb
   }
   arg1 = reinterpret_cast< Angpow::CheFunc * >(argp1);
   {
-    res2 = SWIG_ConvertPtr(obj1, &argp2, SWIGTYPE_p_r_8,  0  | 0);
+    res2 = SWIG_ConvertPtr(obj1, &argp2, SWIGTYPE_p_Angpow__r_8,  0  | 0);
     if (!SWIG_IsOK(res2)) {
-      SWIG_exception_fail(SWIG_ArgError(res2), "in method '" "CheFunc___call__" "', argument " "2"" of type '" "r_8""'"); 
+      SWIG_exception_fail(SWIG_ArgError(res2), "in method '" "CheFunc___call__" "', argument " "2"" of type '" "Angpow::r_8""'"); 
     }  
     if (!argp2) {
-      SWIG_exception_fail(SWIG_ValueError, "invalid null reference " "in method '" "CheFunc___call__" "', argument " "2"" of type '" "r_8""'");
+      SWIG_exception_fail(SWIG_ValueError, "invalid null reference " "in method '" "CheFunc___call__" "', argument " "2"" of type '" "Angpow::r_8""'");
     } else {
-      r_8 * temp = reinterpret_cast< r_8 * >(argp2);
+      Angpow::r_8 * temp = reinterpret_cast< Angpow::r_8 * >(argp2);
       arg2 = *temp;
       if (SWIG_IsNewObj(res2)) delete temp;
     }
   }
   result = ((Angpow::CheFunc const *)arg1)->operator ()(arg2);
-  resultobj = SWIG_NewPointerObj((new r_8(static_cast< const r_8& >(result))), SWIGTYPE_p_r_8, SWIG_POINTER_OWN |  0 );
+  resultobj = SWIG_NewPointerObj((new Angpow::r_8(static_cast< const Angpow::r_8& >(result))), SWIGTYPE_p_Angpow__r_8, SWIG_POINTER_OWN |  0 );
   return resultobj;
 fail:
   return NULL;
@@ -3736,8 +3736,8 @@ fail:
 SWIGINTERN PyObject *_wrap_CheFunc_ChebyshevTransform(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
   PyObject *resultobj = 0;
   Angpow::CheFunc *arg1 = (Angpow::CheFunc *) 0 ;
-  r_8 arg2 ;
-  r_8 arg3 ;
+  Angpow::r_8 arg2 ;
+  Angpow::r_8 arg3 ;
   void *argp1 = 0 ;
   int res1 = 0 ;
   void *argp2 ;
@@ -3755,27 +3755,27 @@ SWIGINTERN PyObject *_wrap_CheFunc_ChebyshevTransform(PyObject *SWIGUNUSEDPARM(s
   }
   arg1 = reinterpret_cast< Angpow::CheFunc * >(argp1);
   {
-    res2 = SWIG_ConvertPtr(obj1, &argp2, SWIGTYPE_p_r_8,  0  | 0);
+    res2 = SWIG_ConvertPtr(obj1, &argp2, SWIGTYPE_p_Angpow__r_8,  0  | 0);
     if (!SWIG_IsOK(res2)) {
-      SWIG_exception_fail(SWIG_ArgError(res2), "in method '" "CheFunc_ChebyshevTransform" "', argument " "2"" of type '" "r_8""'"); 
+      SWIG_exception_fail(SWIG_ArgError(res2), "in method '" "CheFunc_ChebyshevTransform" "', argument " "2"" of type '" "Angpow::r_8""'"); 
     }  
     if (!argp2) {
-      SWIG_exception_fail(SWIG_ValueError, "invalid null reference " "in method '" "CheFunc_ChebyshevTransform" "', argument " "2"" of type '" "r_8""'");
+      SWIG_exception_fail(SWIG_ValueError, "invalid null reference " "in method '" "CheFunc_ChebyshevTransform" "', argument " "2"" of type '" "Angpow::r_8""'");
     } else {
-      r_8 * temp = reinterpret_cast< r_8 * >(argp2);
+      Angpow::r_8 * temp = reinterpret_cast< Angpow::r_8 * >(argp2);
       arg2 = *temp;
       if (SWIG_IsNewObj(res2)) delete temp;
     }
   }
   {
-    res3 = SWIG_ConvertPtr(obj2, &argp3, SWIGTYPE_p_r_8,  0  | 0);
+    res3 = SWIG_ConvertPtr(obj2, &argp3, SWIGTYPE_p_Angpow__r_8,  0  | 0);
     if (!SWIG_IsOK(res3)) {
-      SWIG_exception_fail(SWIG_ArgError(res3), "in method '" "CheFunc_ChebyshevTransform" "', argument " "3"" of type '" "r_8""'"); 
+      SWIG_exception_fail(SWIG_ArgError(res3), "in method '" "CheFunc_ChebyshevTransform" "', argument " "3"" of type '" "Angpow::r_8""'"); 
     }  
     if (!argp3) {
-      SWIG_exception_fail(SWIG_ValueError, "invalid null reference " "in method '" "CheFunc_ChebyshevTransform" "', argument " "3"" of type '" "r_8""'");
+      SWIG_exception_fail(SWIG_ValueError, "invalid null reference " "in method '" "CheFunc_ChebyshevTransform" "', argument " "3"" of type '" "Angpow::r_8""'");
     } else {
-      r_8 * temp = reinterpret_cast< r_8 * >(argp3);
+      Angpow::r_8 * temp = reinterpret_cast< Angpow::r_8 * >(argp3);
       arg3 = *temp;
       if (SWIG_IsNewObj(res3)) delete temp;
     }
@@ -3915,7 +3915,7 @@ SWIGINTERN PyObject *_wrap_CheAlgo_ComputeIntegralUnscaled(PyObject *SWIGUNUSEDP
   void *argp1 = 0 ;
   int res1 = 0 ;
   PyObject * obj0 = 0 ;
-  r_8 result;
+  Angpow::r_8 result;
   
   if (!PyArg_ParseTuple(args,(char *)"O:CheAlgo_ComputeIntegralUnscaled",&obj0)) SWIG_fail;
   res1 = SWIG_ConvertPtr(obj0, &argp1,SWIGTYPE_p_Angpow__CheAlgo, 0 |  0 );
@@ -3924,7 +3924,7 @@ SWIGINTERN PyObject *_wrap_CheAlgo_ComputeIntegralUnscaled(PyObject *SWIGUNUSEDP
   }
   arg1 = reinterpret_cast< Angpow::CheAlgo * >(argp1);
   result = (arg1)->ComputeIntegralUnscaled();
-  resultobj = SWIG_NewPointerObj((new r_8(static_cast< const r_8& >(result))), SWIGTYPE_p_r_8, SWIG_POINTER_OWN |  0 );
+  resultobj = SWIG_NewPointerObj((new Angpow::r_8(static_cast< const Angpow::r_8& >(result))), SWIGTYPE_p_Angpow__r_8, SWIG_POINTER_OWN |  0 );
   return resultobj;
 fail:
   return NULL;
@@ -3989,10 +3989,10 @@ static swig_type_info _swigt__p_Angpow__ClassFunc1D = {"_p_Angpow__ClassFunc1D",
 static swig_type_info _swigt__p_Angpow__Function1D = {"_p_Angpow__Function1D", "Angpow::Function1D *", 0, 0, (void*)0, 0};
 static swig_type_info _swigt__p_Angpow__Function2D = {"_p_Angpow__Function2D", "Angpow::Function2D *", 0, 0, (void*)0, 0};
 static swig_type_info _swigt__p_Angpow__GenericFunction = {"_p_Angpow__GenericFunction", "Angpow::GenericFunction *", 0, 0, (void*)0, 0};
+static swig_type_info _swigt__p_Angpow__r_8 = {"_p_Angpow__r_8", "Angpow::r_8 *", 0, 0, (void*)0, 0};
 static swig_type_info _swigt__p_char = {"_p_char", "char *", 0, 0, (void*)0, 0};
 static swig_type_info _swigt__p_f_double__double = {"_p_f_double__double", "double (*)(double)", 0, 0, (void*)0, 0};
 static swig_type_info _swigt__p_f_double_double__double = {"_p_f_double_double__double", "double (*)(double,double)", 0, 0, (void*)0, 0};
-static swig_type_info _swigt__p_r_8 = {"_p_r_8", "r_8 *", 0, 0, (void*)0, 0};
 static swig_type_info _swigt__p_std__vectorT_Angpow__CheFunc_p_t = {"_p_std__vectorT_Angpow__CheFunc_p_t", "std::vector< Angpow::CheFunc * > *", 0, 0, (void*)0, 0};
 static swig_type_info _swigt__p_std__vectorT_double_t = {"_p_std__vectorT_double_t", "std::vector< double > *", 0, 0, (void*)0, 0};
 static swig_type_info _swigt__p_wallTimer = {"_p_wallTimer", "wallTimer *", 0, 0, (void*)0, 0};
@@ -4004,10 +4004,10 @@ static swig_type_info *swig_type_initial[] = {
   &_swigt__p_Angpow__Function1D,
   &_swigt__p_Angpow__Function2D,
   &_swigt__p_Angpow__GenericFunction,
+  &_swigt__p_Angpow__r_8,
   &_swigt__p_char,
   &_swigt__p_f_double__double,
   &_swigt__p_f_double_double__double,
-  &_swigt__p_r_8,
   &_swigt__p_std__vectorT_Angpow__CheFunc_p_t,
   &_swigt__p_std__vectorT_double_t,
   &_swigt__p_wallTimer,
@@ -4019,10 +4019,10 @@ static swig_cast_info _swigc__p_Angpow__ClassFunc1D[] = {  {&_swigt__p_Angpow__C
 static swig_cast_info _swigc__p_Angpow__Function1D[] = {  {&_swigt__p_Angpow__Function1D, 0, 0, 0},{0, 0, 0, 0}};
 static swig_cast_info _swigc__p_Angpow__Function2D[] = {  {&_swigt__p_Angpow__Function2D, 0, 0, 0},{0, 0, 0, 0}};
 static swig_cast_info _swigc__p_Angpow__GenericFunction[] = {  {&_swigt__p_Angpow__GenericFunction, 0, 0, 0},  {&_swigt__p_Angpow__ClassFunc1D, _p_Angpow__ClassFunc1DTo_p_Angpow__GenericFunction, 0, 0},{0, 0, 0, 0}};
+static swig_cast_info _swigc__p_Angpow__r_8[] = {  {&_swigt__p_Angpow__r_8, 0, 0, 0},{0, 0, 0, 0}};
 static swig_cast_info _swigc__p_char[] = {  {&_swigt__p_char, 0, 0, 0},{0, 0, 0, 0}};
 static swig_cast_info _swigc__p_f_double__double[] = {  {&_swigt__p_f_double__double, 0, 0, 0},{0, 0, 0, 0}};
 static swig_cast_info _swigc__p_f_double_double__double[] = {  {&_swigt__p_f_double_double__double, 0, 0, 0},{0, 0, 0, 0}};
-static swig_cast_info _swigc__p_r_8[] = {  {&_swigt__p_r_8, 0, 0, 0},{0, 0, 0, 0}};
 static swig_cast_info _swigc__p_std__vectorT_Angpow__CheFunc_p_t[] = {  {&_swigt__p_std__vectorT_Angpow__CheFunc_p_t, 0, 0, 0},{0, 0, 0, 0}};
 static swig_cast_info _swigc__p_std__vectorT_double_t[] = {  {&_swigt__p_std__vectorT_double_t, 0, 0, 0},{0, 0, 0, 0}};
 static swig_cast_info _swigc__p_wallTimer[] = {  {&_swigt__p_wallTimer, 0, 0, 0},{0, 0, 0, 0}};
@@ -4034,10 +4034,10 @@ static swig_cast_info *swig_cast_initial[] = {
   _swigc__p_Angpow__Function1D,
   _swigc__p_Angpow__Function2D,
   _swigc__p_Angpow__GenericFunction,
+  _swigc__p_Angpow__r_8,
   _swigc__p_char,
   _swigc__p_f_double__double,
   _swigc__p_f_double_double__double,
-  _swigc__p_r_8,
   _swigc__p_std__vectorT_Angpow__CheFunc_p_t,
   _swigc__p_std__vectorT_double_t,
   _swigc__p_wallTimer,
