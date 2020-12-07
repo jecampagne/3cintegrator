@@ -24,6 +24,16 @@ def test0():
   R2 = 2200.
   chebyshev_order_1 = 8
   chebyshev_order_2 =  chebyshev_order_1
+  n_sub_intervals = 5
+
+  # k-integral bounds
+  kMin = 0.
+  kMax = 1.0 #Mpc^(-1)
+  klp = Angpow.std_vector_double(n_sub_intervals+1)
+  dK = kMax-kMin
+  for i in range(0,n_sub_intervals+1):
+    klp[i] = kMin + dK * i/n_sub_intervals
+  #printf("ell=%d, Nintervales=%d\n", ell,nSubInterv)
 
   #f1 = FuncType1(ell,R1)
   f1 = FuncType1()
@@ -48,7 +58,33 @@ def test0():
   farr.push_back(Angpow.CheFunc(f2, iOrd2))
   farr.push_back(Angpow.CheFunc(f0, iOrd0))
   
-#  CheAlgo cheAlgo(farr);
+  # Initialisation of the Clenshow-Curtis quadrature
+  cheAlgo = Angpow.CheAlgo(farr)
+
+  # Integration
+  integral = 0.
+
+  for p in range(1,n_sub_intervals+1):
+    # get the bounds
+    lowBound = klp[p-1]
+    uppBound = klp[p]
+    
+    if lowBound > uppBound:
+      print('KIntegrator::Compute uppBound < lowBound Fatal')
+      return
+    
+    # Loop on each function to compute their  Foward Chebyshev coefficents
+    for i in range(0,farr.size()):
+      farr[i].ChebyshevTransform(lowBound, uppBound)
+
+    # Compute the sampling of all the functions in the final space dimension
+    cheAlgo.InverseChebyshevTransform()
+
+    # Compute the integral thanks to CC quadrature and the function sampling 
+    integral += (uppBound - lowBound) * cheAlgo.ComputeIntegralUnscaled()
+    
+  print("Approx. Integ = %d",integral)
+
   print('End test0......')
 
 test0()
