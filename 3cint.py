@@ -1,15 +1,12 @@
 
 import Angpow
 
-class FuncType0(Angpow.ClassFunc1D):
-  dummy = 2
+class FuncType0(Angpow.Py_ClassFunc1D):
+#  dummy = 2
   def __init__(self):
-    dummy = 2
-    
-#public Angpow.ClassFunc1D
-#  inline virtual r_8 operator()(r_8 x) const {
-#    return x * (x-1.)*(x-1.);
-#  }
+    return
+  def get_value(x):    
+    return x * (x-1.)*(x-1.)
 #private:
 #  r_8 p_;
 #  r_8 scale_; 
