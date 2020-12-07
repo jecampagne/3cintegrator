@@ -44,9 +44,8 @@ def test0():
   iOrd2 = chebyshev_order_2
   
   farr = Angpow.std_vector_CheFunc()
-  #che_func_1 = Angpow.CheFunc(f1, iOrd1)
-  #farr.push_back(Angpow.CheFunc(f1, iOrd1))
-  #farr.push_back(Angpow.CheFunc(f2, iOrd2))
+  farr.push_back(Angpow.CheFunc(f1, iOrd1))
+  farr.push_back(Angpow.CheFunc(f2, iOrd2))
   farr.push_back(Angpow.CheFunc(f0, iOrd0))
   
 #  CheAlgo cheAlgo(farr);
