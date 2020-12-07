@@ -33,7 +33,7 @@ def test0():
   dK = kMax-kMin
   for i in range(0,n_sub_intervals+1):
     klp[i] = kMin + dK * i/n_sub_intervals
-  #printf("ell=%d, Nintervales=%d\n", ell,nSubInterv)
+  print("ell=%d, Nintervales=%d\n", ell,n_sub_intervals)
 
   #f1 = FuncType1(ell,R1)
   f1 = FuncType1()
@@ -74,8 +74,10 @@ def test0():
       return
     
     # Loop on each function to compute their  Foward Chebyshev coefficents
+    print('debug 000')
     for i in range(0,farr.size()):
       farr[i].ChebyshevTransform(lowBound, uppBound)
+    print('debug 001')
 
     # Compute the sampling of all the functions in the final space dimension
     cheAlgo.InverseChebyshevTransform()
