@@ -21,11 +21,11 @@ public:
   //  virtual double operator()(double x) const = 0;
 };
 
-%feature("director") Py_ClassFunc1D;
-class Py_ClassFunc1D : public ClassFunc1D {
+%feature("director") ClassFunc1D_get_value;
+class ClassFunc1D_get_value : public ClassFunc1D {
 public:  
-  Py_ClassFunc1D();
-  virtual ~Py_ClassFunc1D();
+  ClassFunc1D_get_value();
+  virtual ~ClassFunc1D_get_value();
 public:
   virtual double get_value(double x) const;
 };
