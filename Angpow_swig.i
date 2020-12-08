@@ -1,4 +1,4 @@
-%module Angpow
+%module(directors="1") Angpow
 
 class wallTimer {
 public:
@@ -27,13 +27,14 @@ public:
   //  virtual double operator()(double x) const = 0;
 };
 
-//class Py_ClassFunc1D : public ClassFunc1D {
-//public:  
-//  Py_ClassFunc1D();
-//  virtual ~Py_ClassFunc1D();
-//public:
-//  virtual double get_value(double x) const = 0;
-//};
+%feature("director") Py_ClassFunc1D;
+class Py_ClassFunc1D : public ClassFunc1D {
+public:  
+  Py_ClassFunc1D();
+  virtual ~Py_ClassFunc1D();
+public:
+  virtual double get_value(double x) const;
+};
  
 //class Function1D
 //: public ClassFunc1D
