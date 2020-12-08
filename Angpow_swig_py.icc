@@ -2940,26 +2940,25 @@ SWIG_Python_NonDynamicSetAttr(PyObject *obj, PyObject *name, PyObject *value) {
 #define SWIGTYPE_p_Angpow__CheAlgo swig_types[0]
 #define SWIGTYPE_p_Angpow__CheFunc swig_types[1]
 #define SWIGTYPE_p_Angpow__ClassFunc1D swig_types[2]
-#define SWIGTYPE_p_Angpow__r_8 swig_types[3]
-#define SWIGTYPE_p_allocator_type swig_types[4]
-#define SWIGTYPE_p_char swig_types[5]
-#define SWIGTYPE_p_const_reference swig_types[6]
-#define SWIGTYPE_p_difference_type swig_types[7]
-#define SWIGTYPE_p_p_PyObject swig_types[8]
-#define SWIGTYPE_p_reference swig_types[9]
-#define SWIGTYPE_p_size_type swig_types[10]
-#define SWIGTYPE_p_std__allocatorT_Angpow__CheFunc_p_t swig_types[11]
-#define SWIGTYPE_p_std__allocatorT_double_t swig_types[12]
-#define SWIGTYPE_p_std__invalid_argument swig_types[13]
-#define SWIGTYPE_p_std__vectorT_Angpow__CheFunc_p_std__allocatorT_Angpow__CheFunc_p_t_t swig_types[14]
-#define SWIGTYPE_p_std__vectorT__Tp__Alloc_t swig_types[15]
-#define SWIGTYPE_p_std__vectorT__Tp_p__Alloc_t swig_types[16]
-#define SWIGTYPE_p_std__vectorT_double_std__allocatorT_double_t_t swig_types[17]
-#define SWIGTYPE_p_swig__SwigPyIterator swig_types[18]
-#define SWIGTYPE_p_value_type swig_types[19]
-#define SWIGTYPE_p_wallTimer swig_types[20]
-static swig_type_info *swig_types[22];
-static swig_module_info swig_module = {swig_types, 21, 0, 0, 0, 0};
+#define SWIGTYPE_p_allocator_type swig_types[3]
+#define SWIGTYPE_p_char swig_types[4]
+#define SWIGTYPE_p_const_reference swig_types[5]
+#define SWIGTYPE_p_difference_type swig_types[6]
+#define SWIGTYPE_p_p_PyObject swig_types[7]
+#define SWIGTYPE_p_reference swig_types[8]
+#define SWIGTYPE_p_size_type swig_types[9]
+#define SWIGTYPE_p_std__allocatorT_Angpow__CheFunc_p_t swig_types[10]
+#define SWIGTYPE_p_std__allocatorT_double_t swig_types[11]
+#define SWIGTYPE_p_std__invalid_argument swig_types[12]
+#define SWIGTYPE_p_std__vectorT_Angpow__CheFunc_p_std__allocatorT_Angpow__CheFunc_p_t_t swig_types[13]
+#define SWIGTYPE_p_std__vectorT__Tp__Alloc_t swig_types[14]
+#define SWIGTYPE_p_std__vectorT__Tp_p__Alloc_t swig_types[15]
+#define SWIGTYPE_p_std__vectorT_double_std__allocatorT_double_t_t swig_types[16]
+#define SWIGTYPE_p_swig__SwigPyIterator swig_types[17]
+#define SWIGTYPE_p_value_type swig_types[18]
+#define SWIGTYPE_p_wallTimer swig_types[19]
+static swig_type_info *swig_types[21];
+static swig_module_info swig_module = {swig_types, 20, 0, 0, 0, 0};
 #define SWIG_TypeQuery(name) SWIG_TypeQueryModule(&swig_module, &swig_module, name)
 #define SWIG_MangledTypeQuery(name) SWIG_MangledTypeQueryModule(&swig_module, &swig_module, name)
 
@@ -3206,6 +3205,9 @@ SWIGINTERNINLINE PyObject*
 {
   return PyInt_FromLong((long) value);
 }
+
+
+  #define SWIG_From_double   PyFloat_FromDouble 
 
 
 #include <iostream>
@@ -4690,9 +4692,6 @@ SWIGINTERN std::vector< Angpow::CheFunc * >::iterator std_vector_Sl_Angpow_CheFu
 SWIGINTERN std::vector< Angpow::CheFunc * >::iterator std_vector_Sl_Angpow_CheFunc_Sm__Sg__insert__SWIG_0(std::vector< Angpow::CheFunc * > *self,std::vector< Angpow::CheFunc * >::iterator pos,std::vector< Angpow::CheFunc * >::value_type x){ return self->insert(pos, x); }
 SWIGINTERN void std_vector_Sl_Angpow_CheFunc_Sm__Sg__insert__SWIG_1(std::vector< Angpow::CheFunc * > *self,std::vector< Angpow::CheFunc * >::iterator pos,std::vector< Angpow::CheFunc * >::size_type n,std::vector< Angpow::CheFunc * >::value_type x){ self->insert(pos, n, x); }
 
-  #define SWIG_From_double   PyFloat_FromDouble 
-
-
 namespace swig {
   template <> struct traits<double > {
     typedef value_category category;
@@ -5011,45 +5010,6 @@ fail:
 }
 
 
-SWIGINTERN PyObject *_wrap_CheFunc___call__(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
-  PyObject *resultobj = 0;
-  Angpow::CheFunc *arg1 = (Angpow::CheFunc *) 0 ;
-  Angpow::r_8 arg2 ;
-  void *argp1 = 0 ;
-  int res1 = 0 ;
-  void *argp2 ;
-  int res2 = 0 ;
-  PyObject * obj0 = 0 ;
-  PyObject * obj1 = 0 ;
-  Angpow::r_8 result;
-  
-  if (!PyArg_ParseTuple(args,(char *)"OO:CheFunc___call__",&obj0,&obj1)) SWIG_fail;
-  res1 = SWIG_ConvertPtr(obj0, &argp1,SWIGTYPE_p_Angpow__CheFunc, 0 |  0 );
-  if (!SWIG_IsOK(res1)) {
-    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "CheFunc___call__" "', argument " "1"" of type '" "Angpow::CheFunc const *""'"); 
-  }
-  arg1 = reinterpret_cast< Angpow::CheFunc * >(argp1);
-  {
-    res2 = SWIG_ConvertPtr(obj1, &argp2, SWIGTYPE_p_Angpow__r_8,  0  | 0);
-    if (!SWIG_IsOK(res2)) {
-      SWIG_exception_fail(SWIG_ArgError(res2), "in method '" "CheFunc___call__" "', argument " "2"" of type '" "Angpow::r_8""'"); 
-    }  
-    if (!argp2) {
-      SWIG_exception_fail(SWIG_ValueError, "invalid null reference " "in method '" "CheFunc___call__" "', argument " "2"" of type '" "Angpow::r_8""'");
-    } else {
-      Angpow::r_8 * temp = reinterpret_cast< Angpow::r_8 * >(argp2);
-      arg2 = *temp;
-      if (SWIG_IsNewObj(res2)) delete temp;
-    }
-  }
-  result = ((Angpow::CheFunc const *)arg1)->operator ()(arg2);
-  resultobj = SWIG_NewPointerObj((new Angpow::r_8(static_cast< const Angpow::r_8& >(result))), SWIGTYPE_p_Angpow__r_8, SWIG_POINTER_OWN |  0 );
-  return resultobj;
-fail:
-  return NULL;
-}
-
-
 SWIGINTERN PyObject *_wrap_CheFunc_ChebyshevCoeffFFT(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
   PyObject *resultobj = 0;
   Angpow::CheFunc *arg1 = (Angpow::CheFunc *) 0 ;
@@ -5237,7 +5197,7 @@ SWIGINTERN PyObject *_wrap_CheAlgo_ComputeIntegralUnscaled(PyObject *SWIGUNUSEDP
   void *argp1 = 0 ;
   int res1 = 0 ;
   PyObject * obj0 = 0 ;
-  Angpow::r_8 result;
+  double result;
   
   if (!PyArg_ParseTuple(args,(char *)"O:CheAlgo_ComputeIntegralUnscaled",&obj0)) SWIG_fail;
   res1 = SWIG_ConvertPtr(obj0, &argp1,SWIGTYPE_p_Angpow__CheAlgo, 0 |  0 );
@@ -5245,8 +5205,8 @@ SWIGINTERN PyObject *_wrap_CheAlgo_ComputeIntegralUnscaled(PyObject *SWIGUNUSEDP
     SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "CheAlgo_ComputeIntegralUnscaled" "', argument " "1"" of type '" "Angpow::CheAlgo *""'"); 
   }
   arg1 = reinterpret_cast< Angpow::CheAlgo * >(argp1);
-  result = (arg1)->ComputeIntegralUnscaled();
-  resultobj = SWIG_NewPointerObj((new Angpow::r_8(static_cast< const Angpow::r_8& >(result))), SWIGTYPE_p_Angpow__r_8, SWIG_POINTER_OWN |  0 );
+  result = (double)(arg1)->ComputeIntegralUnscaled();
+  resultobj = SWIG_From_double(static_cast< double >(result));
   return resultobj;
 fail:
   return NULL;
@@ -9894,7 +9854,6 @@ static PyMethodDef SwigMethods[] = {
 	 { (char *)"new_CheFunc", _wrap_new_CheFunc, METH_VARARGS, NULL},
 	 { (char *)"delete_CheFunc", _wrap_delete_CheFunc, METH_VARARGS, NULL},
 	 { (char *)"CheFunc_orderFunc", _wrap_CheFunc_orderFunc, METH_VARARGS, NULL},
-	 { (char *)"CheFunc___call__", _wrap_CheFunc___call__, METH_VARARGS, NULL},
 	 { (char *)"CheFunc_ChebyshevCoeffFFT", _wrap_CheFunc_ChebyshevCoeffFFT, METH_VARARGS, NULL},
 	 { (char *)"CheFunc_ChebyshevTransform", _wrap_CheFunc_ChebyshevTransform, METH_VARARGS, NULL},
 	 { (char *)"CheFunc_swigregister", CheFunc_swigregister, METH_VARARGS, NULL},
@@ -10000,7 +9959,6 @@ static PyMethodDef SwigMethods[] = {
 static swig_type_info _swigt__p_Angpow__CheAlgo = {"_p_Angpow__CheAlgo", "Angpow::CheAlgo *", 0, 0, (void*)0, 0};
 static swig_type_info _swigt__p_Angpow__CheFunc = {"_p_Angpow__CheFunc", "Angpow::CheFunc *|std::vector< Angpow::CheFunc * >::value_type", 0, 0, (void*)0, 0};
 static swig_type_info _swigt__p_Angpow__ClassFunc1D = {"_p_Angpow__ClassFunc1D", "Angpow::ClassFunc1D *", 0, 0, (void*)0, 0};
-static swig_type_info _swigt__p_Angpow__r_8 = {"_p_Angpow__r_8", "Angpow::r_8 *", 0, 0, (void*)0, 0};
 static swig_type_info _swigt__p_allocator_type = {"_p_allocator_type", "allocator_type *", 0, 0, (void*)0, 0};
 static swig_type_info _swigt__p_char = {"_p_char", "char *", 0, 0, (void*)0, 0};
 static swig_type_info _swigt__p_const_reference = {"_p_const_reference", "const_reference *", 0, 0, (void*)0, 0};
@@ -10023,7 +9981,6 @@ static swig_type_info *swig_type_initial[] = {
   &_swigt__p_Angpow__CheAlgo,
   &_swigt__p_Angpow__CheFunc,
   &_swigt__p_Angpow__ClassFunc1D,
-  &_swigt__p_Angpow__r_8,
   &_swigt__p_allocator_type,
   &_swigt__p_char,
   &_swigt__p_const_reference,
@@ -10046,7 +10003,6 @@ static swig_type_info *swig_type_initial[] = {
 static swig_cast_info _swigc__p_Angpow__CheAlgo[] = {  {&_swigt__p_Angpow__CheAlgo, 0, 0, 0},{0, 0, 0, 0}};
 static swig_cast_info _swigc__p_Angpow__CheFunc[] = {  {&_swigt__p_Angpow__CheFunc, 0, 0, 0},{0, 0, 0, 0}};
 static swig_cast_info _swigc__p_Angpow__ClassFunc1D[] = {  {&_swigt__p_Angpow__ClassFunc1D, 0, 0, 0},{0, 0, 0, 0}};
-static swig_cast_info _swigc__p_Angpow__r_8[] = {  {&_swigt__p_Angpow__r_8, 0, 0, 0},{0, 0, 0, 0}};
 static swig_cast_info _swigc__p_allocator_type[] = {  {&_swigt__p_allocator_type, 0, 0, 0},{0, 0, 0, 0}};
 static swig_cast_info _swigc__p_char[] = {  {&_swigt__p_char, 0, 0, 0},{0, 0, 0, 0}};
 static swig_cast_info _swigc__p_const_reference[] = {  {&_swigt__p_const_reference, 0, 0, 0},{0, 0, 0, 0}};
@@ -10069,7 +10025,6 @@ static swig_cast_info *swig_cast_initial[] = {
   _swigc__p_Angpow__CheAlgo,
   _swigc__p_Angpow__CheFunc,
   _swigc__p_Angpow__ClassFunc1D,
-  _swigc__p_Angpow__r_8,
   _swigc__p_allocator_type,
   _swigc__p_char,
   _swigc__p_const_reference,

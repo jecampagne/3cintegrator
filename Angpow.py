@@ -114,7 +114,6 @@ class CheFunc(_object):
     __swig_destroy__ = Angpow_swig_py.delete_CheFunc
     __del__ = lambda self : None;
     def orderFunc(self): return Angpow_swig_py.CheFunc_orderFunc(self)
-    def __call__(self, *args): return Angpow_swig_py.CheFunc___call__(self, *args)
     def ChebyshevCoeffFFT(self): return Angpow_swig_py.CheFunc_ChebyshevCoeffFFT(self)
     def ChebyshevTransform(self, *args): return Angpow_swig_py.CheFunc_ChebyshevTransform(self, *args)
 CheFunc_swigregister = Angpow_swig_py.CheFunc_swigregister
