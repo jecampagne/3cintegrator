@@ -108,31 +108,31 @@ class ClassFunc1D(_object):
 ClassFunc1D_swigregister = Angpow_swig_py.ClassFunc1D_swigregister
 ClassFunc1D_swigregister(ClassFunc1D)
 
-class Py_ClassFunc1D(ClassFunc1D):
+class ClassFunc1D_get_value(ClassFunc1D):
     __swig_setmethods__ = {}
     for _s in [ClassFunc1D]: __swig_setmethods__.update(getattr(_s,'__swig_setmethods__',{}))
-    __setattr__ = lambda self, name, value: _swig_setattr(self, Py_ClassFunc1D, name, value)
+    __setattr__ = lambda self, name, value: _swig_setattr(self, ClassFunc1D_get_value, name, value)
     __swig_getmethods__ = {}
     for _s in [ClassFunc1D]: __swig_getmethods__.update(getattr(_s,'__swig_getmethods__',{}))
-    __getattr__ = lambda self, name: _swig_getattr(self, Py_ClassFunc1D, name)
+    __getattr__ = lambda self, name: _swig_getattr(self, ClassFunc1D_get_value, name)
     __repr__ = _swig_repr
     def __init__(self): 
-        if self.__class__ == Py_ClassFunc1D:
+        if self.__class__ == ClassFunc1D_get_value:
             _self = None
         else:
             _self = self
-        this = Angpow_swig_py.new_Py_ClassFunc1D(_self, )
+        this = Angpow_swig_py.new_ClassFunc1D_get_value(_self, )
         try: self.this.append(this)
         except: self.this = this
-    __swig_destroy__ = Angpow_swig_py.delete_Py_ClassFunc1D
+    __swig_destroy__ = Angpow_swig_py.delete_ClassFunc1D_get_value
     __del__ = lambda self : None;
-    def get_value(self, *args): return Angpow_swig_py.Py_ClassFunc1D_get_value(self, *args)
+    def get_value(self, *args): return Angpow_swig_py.ClassFunc1D_get_value_get_value(self, *args)
     def __disown__(self):
         self.this.disown()
-        Angpow_swig_py.disown_Py_ClassFunc1D(self)
+        Angpow_swig_py.disown_ClassFunc1D_get_value(self)
         return weakref_proxy(self)
-Py_ClassFunc1D_swigregister = Angpow_swig_py.Py_ClassFunc1D_swigregister
-Py_ClassFunc1D_swigregister(Py_ClassFunc1D)
+ClassFunc1D_get_value_swigregister = Angpow_swig_py.ClassFunc1D_get_value_swigregister
+ClassFunc1D_get_value_swigregister(ClassFunc1D_get_value)
 
 class CheFunc(_object):
     __swig_setmethods__ = {}
@@ -146,8 +146,6 @@ class CheFunc(_object):
         except: self.this = this
     __swig_destroy__ = Angpow_swig_py.delete_CheFunc
     __del__ = lambda self : None;
-    def orderFunc(self): return Angpow_swig_py.CheFunc_orderFunc(self)
-    def ChebyshevCoeffFFT(self): return Angpow_swig_py.CheFunc_ChebyshevCoeffFFT(self)
     def ChebyshevTransform(self, *args): return Angpow_swig_py.CheFunc_ChebyshevTransform(self, *args)
 CheFunc_swigregister = Angpow_swig_py.CheFunc_swigregister
 CheFunc_swigregister(CheFunc)
@@ -164,8 +162,6 @@ class CheAlgo(_object):
         except: self.this = this
     __swig_destroy__ = Angpow_swig_py.delete_CheAlgo
     __del__ = lambda self : None;
-    def ClenshawCurtisWeightsFast(self): return Angpow_swig_py.CheAlgo_ClenshawCurtisWeightsFast(self)
-    def InverseChebyshevCoeffFFT(self): return Angpow_swig_py.CheAlgo_InverseChebyshevCoeffFFT(self)
     def InverseChebyshevTransform(self): return Angpow_swig_py.CheAlgo_InverseChebyshevTransform(self)
     def ComputeIntegralUnscaled(self): return Angpow_swig_py.CheAlgo_ComputeIntegralUnscaled(self)
 CheAlgo_swigregister = Angpow_swig_py.CheAlgo_swigregister
