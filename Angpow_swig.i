@@ -13,6 +13,8 @@ public:
 
 namespace Angpow {
 
+typedef double r_8;
+  
 class ClassFunc1D {
 public:  
   ClassFunc1D();
@@ -40,8 +42,7 @@ public:
   CheFunc(ClassFunc1D* func, int ordFunc);
   virtual ~CheFunc();
 public:  
-//void ChebyshevTransform(Angpow::r_8 a, Angpow::r_8 b);
-  void ChebyshevTransform(double a, double b);
+  void ChebyshevTransform(r_8 a, r_8 b);
 };
 
 //////////////////////////////
@@ -54,8 +55,7 @@ public:
   virtual ~CheAlgo();
 public:
   void InverseChebyshevTransform();
-//Angpow::r_8 ComputeIntegralUnscaled();
-  double ComputeIntegralUnscaled();
+  r_8 ComputeIntegralUnscaled();
 };
 
 //////////////////////////////
