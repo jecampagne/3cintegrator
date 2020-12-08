@@ -69,6 +69,13 @@ except AttributeError:
     _newclass = 0
 
 
+try:
+    import weakref
+    weakref_proxy = weakref.proxy
+except:
+    weakref_proxy = lambda x: x
+
+
 class wallTimer(_object):
     __swig_setmethods__ = {}
     __setattr__ = lambda self, name, value: _swig_setattr(self, wallTimer, name, value)
@@ -100,6 +107,32 @@ class ClassFunc1D(_object):
     __del__ = lambda self : None;
 ClassFunc1D_swigregister = Angpow_swig_py.ClassFunc1D_swigregister
 ClassFunc1D_swigregister(ClassFunc1D)
+
+class Py_ClassFunc1D(ClassFunc1D):
+    __swig_setmethods__ = {}
+    for _s in [ClassFunc1D]: __swig_setmethods__.update(getattr(_s,'__swig_setmethods__',{}))
+    __setattr__ = lambda self, name, value: _swig_setattr(self, Py_ClassFunc1D, name, value)
+    __swig_getmethods__ = {}
+    for _s in [ClassFunc1D]: __swig_getmethods__.update(getattr(_s,'__swig_getmethods__',{}))
+    __getattr__ = lambda self, name: _swig_getattr(self, Py_ClassFunc1D, name)
+    __repr__ = _swig_repr
+    def __init__(self): 
+        if self.__class__ == Py_ClassFunc1D:
+            _self = None
+        else:
+            _self = self
+        this = Angpow_swig_py.new_Py_ClassFunc1D(_self, )
+        try: self.this.append(this)
+        except: self.this = this
+    __swig_destroy__ = Angpow_swig_py.delete_Py_ClassFunc1D
+    __del__ = lambda self : None;
+    def get_value(self, *args): return Angpow_swig_py.Py_ClassFunc1D_get_value(self, *args)
+    def __disown__(self):
+        self.this.disown()
+        Angpow_swig_py.disown_Py_ClassFunc1D(self)
+        return weakref_proxy(self)
+Py_ClassFunc1D_swigregister = Angpow_swig_py.Py_ClassFunc1D_swigregister
+Py_ClassFunc1D_swigregister(Py_ClassFunc1D)
 
 class CheFunc(_object):
     __swig_setmethods__ = {}
