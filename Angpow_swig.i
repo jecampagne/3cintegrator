@@ -61,8 +61,8 @@ public:
 //////////////////////////////
 //////////////////////////////
 
-}//end namespace Andpow
+} //end namespace Andpow
 
 %include std_vector.i
 %template(std_vector_CheFunc)  std::vector<Angpow::CheFunc*>;
-%template(std_vector_double)  std::vector<double>;
+%template(std_vector_double)   std::vector<double>;
