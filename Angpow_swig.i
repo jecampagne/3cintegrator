@@ -17,8 +17,8 @@ class ClassFunc1D {
 public:  
   ClassFunc1D();
   virtual ~ClassFunc1D();
-  //public:
-  //  virtual double operator()(double x) const = 0;
+public:
+  virtual double operator()(double x) const = 0;
 };
 
 %feature("director") ClassFunc1D_get_value;
@@ -28,6 +28,7 @@ public:
   virtual ~ClassFunc1D_get_value();
 public:
   virtual double get_value(double x) const;
+  virtual double operator()(double x);
 };
  
 //////////////////////////////
