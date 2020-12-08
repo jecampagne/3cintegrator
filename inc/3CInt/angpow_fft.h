@@ -28,7 +28,7 @@
 #include <iostream>
 #include <vector>
 
-#include <omp.h>          //OpenMP for function sampling
+//#include <omp.h>          //OpenMP for function sampling
 #include <fftw3.h>        //Discrete Cosine Function
 
 #include "angpow_exceptions.h" //exceptions
