@@ -1,13 +1,13 @@
 
 import Angpow
 
-class FuncType0(Angpow.Py_ClassFunc1D):
+class FuncType0(Angpow.ClassFunc1D_get_value):
   def get_value(self,a_x):    
     return a_x * (a_x-1.)*(a_x-1.)
 
 import math
   
-class FuncType1(Angpow.Py_ClassFunc1D):
+class FuncType1(Angpow.ClassFunc1D_get_value):
   m_ell = 0
   m_R = 0
   #def __init__(self,a_ell,a_R):
