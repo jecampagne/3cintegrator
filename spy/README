@@ -5,6 +5,8 @@
   About Python, you have to take care to use the Python binary program of the version
  used to compile and link the Angpow_swig_lib.so plugin.
 
+  sh> make
+  sh> cd spy
   sh> ./build
   sh> export PYTHONPATH=../lib
   sh> <python_exe> -i 3cint.py
