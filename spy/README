@@ -2,6 +2,3 @@
   You have to customize the bash build script to change the swig binary binary path
  along the Python include and library paths.
 
-  
-
-  
