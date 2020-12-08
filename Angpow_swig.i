@@ -72,7 +72,7 @@ class CheFunc {
   //void updateVec(std::vector<r_8>& vec);
 
   // Single value evaluation
-  virtual Angpow::r_8 operator()(Angpow::r_8 x) const;
+  //virtual Angpow::r_8 operator()(Angpow::r_8 x) const;
 
   // Vectorized evaluations
   //virtual void getValues(const std::vector<double>& vin,std::vector<double>& vout) const;
@@ -94,7 +94,8 @@ public:
   void ClenshawCurtisWeightsFast();
   void InverseChebyshevCoeffFFT();
   void InverseChebyshevTransform();
-  Angpow::r_8 ComputeIntegralUnscaled();
+  //Angpow::r_8 ComputeIntegralUnscaled();
+  double ComputeIntegralUnscaled();
 };
 
 //////////////////////////////
