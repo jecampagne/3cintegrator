@@ -39,8 +39,6 @@ public:
   CheFunc(ClassFunc1D* func, int ordFunc);
   virtual ~CheFunc();
 public:  
-  int orderFunc();
-  void ChebyshevCoeffFFT();
 //void ChebyshevTransform(Angpow::r_8 a, Angpow::r_8 b);
   void ChebyshevTransform(double a, double b);
 };
@@ -54,10 +52,8 @@ public:
   CheAlgo(std::vector<CheFunc*> farr);
   virtual ~CheAlgo();
 public:
-  void ClenshawCurtisWeightsFast();
-  void InverseChebyshevCoeffFFT();
   void InverseChebyshevTransform();
-  //Angpow::r_8 ComputeIntegralUnscaled();
+//Angpow::r_8 ComputeIntegralUnscaled();
   double ComputeIntegralUnscaled();
 };
 
