@@ -1,17 +1,15 @@
 
 import Angpow
 
-#class FuncType0(Angpow.Py_ClassFunc1D):
-class FuncType0(Angpow.ClassFunc1D):
-  def get_value(a_x):    
-    #return a_x * (a_x-1.)*(a_x-1.)
-    value = a_x * (a_x-1.)*(a_x-1.)
-    print 'FuncType0::get_value ',a_x,' : ',value
-    return value
+class FuncType0(Angpow.Py_ClassFunc1D):
+#class FuncType0(Angpow.ClassFunc1D):
+  def get_value(self,a_x):    
+    return a_x * (a_x-1.)*(a_x-1.)
 
 import math
   
-class FuncType1(Angpow.ClassFunc1D):
+class FuncType1(Angpow.Py_ClassFunc1D):
+#class FuncType1(Angpow.ClassFunc1D):
   m_ell = 0
   m_R = 0
   #def __init__(self,a_ell,a_R):
@@ -19,10 +17,7 @@ class FuncType1(Angpow.ClassFunc1D):
   #  self.m_ell = a_ell
   #  self.m_R = a_R
   def get_value(self,a_x):
-    #return math.cos(a_x*self.m_R - self.m_ell*math.pi*0.5 - math.pi*0.25)
-    value = math.cos(a_x*self.m_R - self.m_ell*math.pi*0.5 - math.pi*0.25)
-    print 'FuncType1::get_value ',a_x,' : ',value
-    return value
+    return math.cos(a_x*self.m_R - self.m_ell*math.pi*0.5 - math.pi*0.25)
 
 def test0():
   ell = 20
