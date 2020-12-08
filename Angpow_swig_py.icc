@@ -3381,7 +3381,7 @@ namespace Swig {
 #define SWIGTYPE_p_Angpow__CheAlgo swig_types[0]
 #define SWIGTYPE_p_Angpow__CheFunc swig_types[1]
 #define SWIGTYPE_p_Angpow__ClassFunc1D swig_types[2]
-#define SWIGTYPE_p_Angpow__Py_ClassFunc1D swig_types[3]
+#define SWIGTYPE_p_Angpow__ClassFunc1D_get_value swig_types[3]
 #define SWIGTYPE_p_allocator_type swig_types[4]
 #define SWIGTYPE_p_char swig_types[5]
 #define SWIGTYPE_p_const_reference swig_types[6]
@@ -3642,13 +3642,6 @@ SWIG_AsVal_int (PyObject * obj, int *val)
     }
   }  
   return res;
-}
-
-
-SWIGINTERNINLINE PyObject*
-  SWIG_From_int  (int value)
-{
-  return PyInt_FromLong((long) value);
 }
 
 
@@ -5259,22 +5252,22 @@ SWIGINTERN void std_vector_Sl_double_Sg__insert__SWIG_1(std::vector< double > *s
 
 #include "Angpow_swig_py.h"
 
-SwigDirector_Py_ClassFunc1D::SwigDirector_Py_ClassFunc1D(PyObject *self): Angpow::Py_ClassFunc1D(), Swig::Director(self) {
-  SWIG_DIRECTOR_RGTR((Angpow::Py_ClassFunc1D *)this, this); 
+SwigDirector_ClassFunc1D_get_value::SwigDirector_ClassFunc1D_get_value(PyObject *self): Angpow::ClassFunc1D_get_value(), Swig::Director(self) {
+  SWIG_DIRECTOR_RGTR((Angpow::ClassFunc1D_get_value *)this, this); 
 }
 
 
 
 
-SwigDirector_Py_ClassFunc1D::~SwigDirector_Py_ClassFunc1D() {
+SwigDirector_ClassFunc1D_get_value::~SwigDirector_ClassFunc1D_get_value() {
 }
 
-double SwigDirector_Py_ClassFunc1D::get_value(double x) const {
+double SwigDirector_ClassFunc1D_get_value::get_value(double x) const {
   double c_result;
   swig::SwigVar_PyObject obj0;
   obj0 = SWIG_From_double(static_cast< double >(x));
   if (!swig_get_self()) {
-    Swig::DirectorException::raise("'self' uninitialized, maybe you forgot to call Py_ClassFunc1D.__init__.");
+    Swig::DirectorException::raise("'self' uninitialized, maybe you forgot to call ClassFunc1D_get_value.__init__.");
   }
 #if defined(SWIG_PYTHON_DIRECTOR_VTABLE)
   const size_t swig_method_index = 0;
@@ -5287,7 +5280,7 @@ double SwigDirector_Py_ClassFunc1D::get_value(double x) const {
   if (!result) {
     PyObject *error = PyErr_Occurred();
     if (error) {
-      Swig::DirectorMethodException::raise("Error detected when calling 'Py_ClassFunc1D.get_value'");
+      Swig::DirectorMethodException::raise("Error detected when calling 'ClassFunc1D_get_value.get_value'");
     }
   }
   double swig_val;
@@ -5427,41 +5420,41 @@ SWIGINTERN PyObject *ClassFunc1D_swigregister(PyObject *SWIGUNUSEDPARM(self), Py
   return SWIG_Py_Void();
 }
 
-SWIGINTERN PyObject *_wrap_new_Py_ClassFunc1D(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
+SWIGINTERN PyObject *_wrap_new_ClassFunc1D_get_value(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
   PyObject *resultobj = 0;
   PyObject *arg1 = (PyObject *) 0 ;
   PyObject * obj0 = 0 ;
-  Angpow::Py_ClassFunc1D *result = 0 ;
+  Angpow::ClassFunc1D_get_value *result = 0 ;
   
-  if (!PyArg_ParseTuple(args,(char *)"O:new_Py_ClassFunc1D",&obj0)) SWIG_fail;
+  if (!PyArg_ParseTuple(args,(char *)"O:new_ClassFunc1D_get_value",&obj0)) SWIG_fail;
   arg1 = obj0;
   if ( arg1 != Py_None ) {
     /* subclassed */
-    result = (Angpow::Py_ClassFunc1D *)new SwigDirector_Py_ClassFunc1D(arg1); 
+    result = (Angpow::ClassFunc1D_get_value *)new SwigDirector_ClassFunc1D_get_value(arg1); 
   } else {
-    result = (Angpow::Py_ClassFunc1D *)new Angpow::Py_ClassFunc1D(); 
+    result = (Angpow::ClassFunc1D_get_value *)new Angpow::ClassFunc1D_get_value(); 
   }
   
-  resultobj = SWIG_NewPointerObj(SWIG_as_voidptr(result), SWIGTYPE_p_Angpow__Py_ClassFunc1D, SWIG_POINTER_NEW |  0 );
+  resultobj = SWIG_NewPointerObj(SWIG_as_voidptr(result), SWIGTYPE_p_Angpow__ClassFunc1D_get_value, SWIG_POINTER_NEW |  0 );
   return resultobj;
 fail:
   return NULL;
 }
 
 
-SWIGINTERN PyObject *_wrap_delete_Py_ClassFunc1D(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
+SWIGINTERN PyObject *_wrap_delete_ClassFunc1D_get_value(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
   PyObject *resultobj = 0;
-  Angpow::Py_ClassFunc1D *arg1 = (Angpow::Py_ClassFunc1D *) 0 ;
+  Angpow::ClassFunc1D_get_value *arg1 = (Angpow::ClassFunc1D_get_value *) 0 ;
   void *argp1 = 0 ;
   int res1 = 0 ;
   PyObject * obj0 = 0 ;
   
-  if (!PyArg_ParseTuple(args,(char *)"O:delete_Py_ClassFunc1D",&obj0)) SWIG_fail;
-  res1 = SWIG_ConvertPtr(obj0, &argp1,SWIGTYPE_p_Angpow__Py_ClassFunc1D, SWIG_POINTER_DISOWN |  0 );
+  if (!PyArg_ParseTuple(args,(char *)"O:delete_ClassFunc1D_get_value",&obj0)) SWIG_fail;
+  res1 = SWIG_ConvertPtr(obj0, &argp1,SWIGTYPE_p_Angpow__ClassFunc1D_get_value, SWIG_POINTER_DISOWN |  0 );
   if (!SWIG_IsOK(res1)) {
-    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "delete_Py_ClassFunc1D" "', argument " "1"" of type '" "Angpow::Py_ClassFunc1D *""'"); 
+    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "delete_ClassFunc1D_get_value" "', argument " "1"" of type '" "Angpow::ClassFunc1D_get_value *""'"); 
   }
-  arg1 = reinterpret_cast< Angpow::Py_ClassFunc1D * >(argp1);
+  arg1 = reinterpret_cast< Angpow::ClassFunc1D_get_value * >(argp1);
   delete arg1;
   resultobj = SWIG_Py_Void();
   return resultobj;
@@ -5470,9 +5463,9 @@ fail:
 }
 
 
-SWIGINTERN PyObject *_wrap_Py_ClassFunc1D_get_value(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
+SWIGINTERN PyObject *_wrap_ClassFunc1D_get_value_get_value(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
   PyObject *resultobj = 0;
-  Angpow::Py_ClassFunc1D *arg1 = (Angpow::Py_ClassFunc1D *) 0 ;
+  Angpow::ClassFunc1D_get_value *arg1 = (Angpow::ClassFunc1D_get_value *) 0 ;
   double arg2 ;
   void *argp1 = 0 ;
   int res1 = 0 ;
@@ -5484,24 +5477,24 @@ SWIGINTERN PyObject *_wrap_Py_ClassFunc1D_get_value(PyObject *SWIGUNUSEDPARM(sel
   bool upcall = false;
   double result;
   
-  if (!PyArg_ParseTuple(args,(char *)"OO:Py_ClassFunc1D_get_value",&obj0,&obj1)) SWIG_fail;
-  res1 = SWIG_ConvertPtr(obj0, &argp1,SWIGTYPE_p_Angpow__Py_ClassFunc1D, 0 |  0 );
+  if (!PyArg_ParseTuple(args,(char *)"OO:ClassFunc1D_get_value_get_value",&obj0,&obj1)) SWIG_fail;
+  res1 = SWIG_ConvertPtr(obj0, &argp1,SWIGTYPE_p_Angpow__ClassFunc1D_get_value, 0 |  0 );
   if (!SWIG_IsOK(res1)) {
-    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "Py_ClassFunc1D_get_value" "', argument " "1"" of type '" "Angpow::Py_ClassFunc1D const *""'"); 
+    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "ClassFunc1D_get_value_get_value" "', argument " "1"" of type '" "Angpow::ClassFunc1D_get_value const *""'"); 
   }
-  arg1 = reinterpret_cast< Angpow::Py_ClassFunc1D * >(argp1);
+  arg1 = reinterpret_cast< Angpow::ClassFunc1D_get_value * >(argp1);
   ecode2 = SWIG_AsVal_double(obj1, &val2);
   if (!SWIG_IsOK(ecode2)) {
-    SWIG_exception_fail(SWIG_ArgError(ecode2), "in method '" "Py_ClassFunc1D_get_value" "', argument " "2"" of type '" "double""'");
+    SWIG_exception_fail(SWIG_ArgError(ecode2), "in method '" "ClassFunc1D_get_value_get_value" "', argument " "2"" of type '" "double""'");
   } 
   arg2 = static_cast< double >(val2);
   director = SWIG_DIRECTOR_CAST(arg1);
   upcall = (director && (director->swig_get_self()==obj0));
   try {
     if (upcall) {
-      result = (double)((Angpow::Py_ClassFunc1D const *)arg1)->Angpow::Py_ClassFunc1D::get_value(arg2);
+      result = (double)((Angpow::ClassFunc1D_get_value const *)arg1)->Angpow::ClassFunc1D_get_value::get_value(arg2);
     } else {
-      result = (double)((Angpow::Py_ClassFunc1D const *)arg1)->get_value(arg2);
+      result = (double)((Angpow::ClassFunc1D_get_value const *)arg1)->get_value(arg2);
     }
   } catch (Swig::DirectorException&) {
     SWIG_fail;
@@ -5513,19 +5506,19 @@ fail:
 }
 
 
-SWIGINTERN PyObject *_wrap_disown_Py_ClassFunc1D(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
+SWIGINTERN PyObject *_wrap_disown_ClassFunc1D_get_value(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
   PyObject *resultobj = 0;
-  Angpow::Py_ClassFunc1D *arg1 = (Angpow::Py_ClassFunc1D *) 0 ;
+  Angpow::ClassFunc1D_get_value *arg1 = (Angpow::ClassFunc1D_get_value *) 0 ;
   void *argp1 = 0 ;
   int res1 = 0 ;
   PyObject * obj0 = 0 ;
   
-  if (!PyArg_ParseTuple(args,(char *)"O:disown_Py_ClassFunc1D",&obj0)) SWIG_fail;
-  res1 = SWIG_ConvertPtr(obj0, &argp1,SWIGTYPE_p_Angpow__Py_ClassFunc1D, 0 |  0 );
+  if (!PyArg_ParseTuple(args,(char *)"O:disown_ClassFunc1D_get_value",&obj0)) SWIG_fail;
+  res1 = SWIG_ConvertPtr(obj0, &argp1,SWIGTYPE_p_Angpow__ClassFunc1D_get_value, 0 |  0 );
   if (!SWIG_IsOK(res1)) {
-    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "disown_Py_ClassFunc1D" "', argument " "1"" of type '" "Angpow::Py_ClassFunc1D *""'"); 
+    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "disown_ClassFunc1D_get_value" "', argument " "1"" of type '" "Angpow::ClassFunc1D_get_value *""'"); 
   }
-  arg1 = reinterpret_cast< Angpow::Py_ClassFunc1D * >(argp1);
+  arg1 = reinterpret_cast< Angpow::ClassFunc1D_get_value * >(argp1);
   {
     Swig::Director *director = SWIG_DIRECTOR_CAST(arg1);
     if (director) director->swig_disown();
@@ -5538,10 +5531,10 @@ fail:
 }
 
 
-SWIGINTERN PyObject *Py_ClassFunc1D_swigregister(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
+SWIGINTERN PyObject *ClassFunc1D_get_value_swigregister(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
   PyObject *obj;
   if (!PyArg_ParseTuple(args,(char*)"O:swigregister", &obj)) return NULL;
-  SWIG_TypeNewClientData(SWIGTYPE_p_Angpow__Py_ClassFunc1D, SWIG_NewClientData(obj));
+  SWIG_TypeNewClientData(SWIGTYPE_p_Angpow__ClassFunc1D_get_value, SWIG_NewClientData(obj));
   return SWIG_Py_Void();
 }
 
@@ -5590,49 +5583,6 @@ SWIGINTERN PyObject *_wrap_delete_CheFunc(PyObject *SWIGUNUSEDPARM(self), PyObje
   }
   arg1 = reinterpret_cast< Angpow::CheFunc * >(argp1);
   delete arg1;
-  resultobj = SWIG_Py_Void();
-  return resultobj;
-fail:
-  return NULL;
-}
-
-
-SWIGINTERN PyObject *_wrap_CheFunc_orderFunc(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
-  PyObject *resultobj = 0;
-  Angpow::CheFunc *arg1 = (Angpow::CheFunc *) 0 ;
-  void *argp1 = 0 ;
-  int res1 = 0 ;
-  PyObject * obj0 = 0 ;
-  int result;
-  
-  if (!PyArg_ParseTuple(args,(char *)"O:CheFunc_orderFunc",&obj0)) SWIG_fail;
-  res1 = SWIG_ConvertPtr(obj0, &argp1,SWIGTYPE_p_Angpow__CheFunc, 0 |  0 );
-  if (!SWIG_IsOK(res1)) {
-    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "CheFunc_orderFunc" "', argument " "1"" of type '" "Angpow::CheFunc *""'"); 
-  }
-  arg1 = reinterpret_cast< Angpow::CheFunc * >(argp1);
-  result = (int)(arg1)->orderFunc();
-  resultobj = SWIG_From_int(static_cast< int >(result));
-  return resultobj;
-fail:
-  return NULL;
-}
-
-
-SWIGINTERN PyObject *_wrap_CheFunc_ChebyshevCoeffFFT(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
-  PyObject *resultobj = 0;
-  Angpow::CheFunc *arg1 = (Angpow::CheFunc *) 0 ;
-  void *argp1 = 0 ;
-  int res1 = 0 ;
-  PyObject * obj0 = 0 ;
-  
-  if (!PyArg_ParseTuple(args,(char *)"O:CheFunc_ChebyshevCoeffFFT",&obj0)) SWIG_fail;
-  res1 = SWIG_ConvertPtr(obj0, &argp1,SWIGTYPE_p_Angpow__CheFunc, 0 |  0 );
-  if (!SWIG_IsOK(res1)) {
-    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "CheFunc_ChebyshevCoeffFFT" "', argument " "1"" of type '" "Angpow::CheFunc *""'"); 
-  }
-  arg1 = reinterpret_cast< Angpow::CheFunc * >(argp1);
-  (arg1)->ChebyshevCoeffFFT();
   resultobj = SWIG_Py_Void();
   return resultobj;
 fail:
@@ -5730,48 +5680,6 @@ SWIGINTERN PyObject *_wrap_delete_CheAlgo(PyObject *SWIGUNUSEDPARM(self), PyObje
   }
   arg1 = reinterpret_cast< Angpow::CheAlgo * >(argp1);
   delete arg1;
-  resultobj = SWIG_Py_Void();
-  return resultobj;
-fail:
-  return NULL;
-}
-
-
-SWIGINTERN PyObject *_wrap_CheAlgo_ClenshawCurtisWeightsFast(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
-  PyObject *resultobj = 0;
-  Angpow::CheAlgo *arg1 = (Angpow::CheAlgo *) 0 ;
-  void *argp1 = 0 ;
-  int res1 = 0 ;
-  PyObject * obj0 = 0 ;
-  
-  if (!PyArg_ParseTuple(args,(char *)"O:CheAlgo_ClenshawCurtisWeightsFast",&obj0)) SWIG_fail;
-  res1 = SWIG_ConvertPtr(obj0, &argp1,SWIGTYPE_p_Angpow__CheAlgo, 0 |  0 );
-  if (!SWIG_IsOK(res1)) {
-    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "CheAlgo_ClenshawCurtisWeightsFast" "', argument " "1"" of type '" "Angpow::CheAlgo *""'"); 
-  }
-  arg1 = reinterpret_cast< Angpow::CheAlgo * >(argp1);
-  (arg1)->ClenshawCurtisWeightsFast();
-  resultobj = SWIG_Py_Void();
-  return resultobj;
-fail:
-  return NULL;
-}
-
-
-SWIGINTERN PyObject *_wrap_CheAlgo_InverseChebyshevCoeffFFT(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
-  PyObject *resultobj = 0;
-  Angpow::CheAlgo *arg1 = (Angpow::CheAlgo *) 0 ;
-  void *argp1 = 0 ;
-  int res1 = 0 ;
-  PyObject * obj0 = 0 ;
-  
-  if (!PyArg_ParseTuple(args,(char *)"O:CheAlgo_InverseChebyshevCoeffFFT",&obj0)) SWIG_fail;
-  res1 = SWIG_ConvertPtr(obj0, &argp1,SWIGTYPE_p_Angpow__CheAlgo, 0 |  0 );
-  if (!SWIG_IsOK(res1)) {
-    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "CheAlgo_InverseChebyshevCoeffFFT" "', argument " "1"" of type '" "Angpow::CheAlgo *""'"); 
-  }
-  arg1 = reinterpret_cast< Angpow::CheAlgo * >(argp1);
-  (arg1)->InverseChebyshevCoeffFFT();
   resultobj = SWIG_Py_Void();
   return resultobj;
 fail:
@@ -10460,21 +10368,17 @@ static PyMethodDef SwigMethods[] = {
 	 { (char *)"new_ClassFunc1D", _wrap_new_ClassFunc1D, METH_VARARGS, NULL},
 	 { (char *)"delete_ClassFunc1D", _wrap_delete_ClassFunc1D, METH_VARARGS, NULL},
 	 { (char *)"ClassFunc1D_swigregister", ClassFunc1D_swigregister, METH_VARARGS, NULL},
-	 { (char *)"new_Py_ClassFunc1D", _wrap_new_Py_ClassFunc1D, METH_VARARGS, NULL},
-	 { (char *)"delete_Py_ClassFunc1D", _wrap_delete_Py_ClassFunc1D, METH_VARARGS, NULL},
-	 { (char *)"Py_ClassFunc1D_get_value", _wrap_Py_ClassFunc1D_get_value, METH_VARARGS, NULL},
-	 { (char *)"disown_Py_ClassFunc1D", _wrap_disown_Py_ClassFunc1D, METH_VARARGS, NULL},
-	 { (char *)"Py_ClassFunc1D_swigregister", Py_ClassFunc1D_swigregister, METH_VARARGS, NULL},
+	 { (char *)"new_ClassFunc1D_get_value", _wrap_new_ClassFunc1D_get_value, METH_VARARGS, NULL},
+	 { (char *)"delete_ClassFunc1D_get_value", _wrap_delete_ClassFunc1D_get_value, METH_VARARGS, NULL},
+	 { (char *)"ClassFunc1D_get_value_get_value", _wrap_ClassFunc1D_get_value_get_value, METH_VARARGS, NULL},
+	 { (char *)"disown_ClassFunc1D_get_value", _wrap_disown_ClassFunc1D_get_value, METH_VARARGS, NULL},
+	 { (char *)"ClassFunc1D_get_value_swigregister", ClassFunc1D_get_value_swigregister, METH_VARARGS, NULL},
 	 { (char *)"new_CheFunc", _wrap_new_CheFunc, METH_VARARGS, NULL},
 	 { (char *)"delete_CheFunc", _wrap_delete_CheFunc, METH_VARARGS, NULL},
-	 { (char *)"CheFunc_orderFunc", _wrap_CheFunc_orderFunc, METH_VARARGS, NULL},
-	 { (char *)"CheFunc_ChebyshevCoeffFFT", _wrap_CheFunc_ChebyshevCoeffFFT, METH_VARARGS, NULL},
 	 { (char *)"CheFunc_ChebyshevTransform", _wrap_CheFunc_ChebyshevTransform, METH_VARARGS, NULL},
 	 { (char *)"CheFunc_swigregister", CheFunc_swigregister, METH_VARARGS, NULL},
 	 { (char *)"new_CheAlgo", _wrap_new_CheAlgo, METH_VARARGS, NULL},
 	 { (char *)"delete_CheAlgo", _wrap_delete_CheAlgo, METH_VARARGS, NULL},
-	 { (char *)"CheAlgo_ClenshawCurtisWeightsFast", _wrap_CheAlgo_ClenshawCurtisWeightsFast, METH_VARARGS, NULL},
-	 { (char *)"CheAlgo_InverseChebyshevCoeffFFT", _wrap_CheAlgo_InverseChebyshevCoeffFFT, METH_VARARGS, NULL},
 	 { (char *)"CheAlgo_InverseChebyshevTransform", _wrap_CheAlgo_InverseChebyshevTransform, METH_VARARGS, NULL},
 	 { (char *)"CheAlgo_ComputeIntegralUnscaled", _wrap_CheAlgo_ComputeIntegralUnscaled, METH_VARARGS, NULL},
 	 { (char *)"CheAlgo_swigregister", CheAlgo_swigregister, METH_VARARGS, NULL},
@@ -10570,13 +10474,13 @@ static PyMethodDef SwigMethods[] = {
 
 /* -------- TYPE CONVERSION AND EQUIVALENCE RULES (BEGIN) -------- */
 
-static void *_p_Angpow__Py_ClassFunc1DTo_p_Angpow__ClassFunc1D(void *x, int *SWIGUNUSEDPARM(newmemory)) {
-    return (void *)((Angpow::ClassFunc1D *)  ((Angpow::Py_ClassFunc1D *) x));
+static void *_p_Angpow__ClassFunc1D_get_valueTo_p_Angpow__ClassFunc1D(void *x, int *SWIGUNUSEDPARM(newmemory)) {
+    return (void *)((Angpow::ClassFunc1D *)  ((Angpow::ClassFunc1D_get_value *) x));
 }
 static swig_type_info _swigt__p_Angpow__CheAlgo = {"_p_Angpow__CheAlgo", "Angpow::CheAlgo *", 0, 0, (void*)0, 0};
 static swig_type_info _swigt__p_Angpow__CheFunc = {"_p_Angpow__CheFunc", "Angpow::CheFunc *|std::vector< Angpow::CheFunc * >::value_type", 0, 0, (void*)0, 0};
 static swig_type_info _swigt__p_Angpow__ClassFunc1D = {"_p_Angpow__ClassFunc1D", "Angpow::ClassFunc1D *", 0, 0, (void*)0, 0};
-static swig_type_info _swigt__p_Angpow__Py_ClassFunc1D = {"_p_Angpow__Py_ClassFunc1D", "Angpow::Py_ClassFunc1D *", 0, 0, (void*)0, 0};
+static swig_type_info _swigt__p_Angpow__ClassFunc1D_get_value = {"_p_Angpow__ClassFunc1D_get_value", "Angpow::ClassFunc1D_get_value *", 0, 0, (void*)0, 0};
 static swig_type_info _swigt__p_allocator_type = {"_p_allocator_type", "allocator_type *", 0, 0, (void*)0, 0};
 static swig_type_info _swigt__p_char = {"_p_char", "char *", 0, 0, (void*)0, 0};
 static swig_type_info _swigt__p_const_reference = {"_p_const_reference", "const_reference *", 0, 0, (void*)0, 0};
@@ -10599,7 +10503,7 @@ static swig_type_info *swig_type_initial[] = {
   &_swigt__p_Angpow__CheAlgo,
   &_swigt__p_Angpow__CheFunc,
   &_swigt__p_Angpow__ClassFunc1D,
-  &_swigt__p_Angpow__Py_ClassFunc1D,
+  &_swigt__p_Angpow__ClassFunc1D_get_value,
   &_swigt__p_allocator_type,
   &_swigt__p_char,
   &_swigt__p_const_reference,
@@ -10621,8 +10525,8 @@ static swig_type_info *swig_type_initial[] = {
 
 static swig_cast_info _swigc__p_Angpow__CheAlgo[] = {  {&_swigt__p_Angpow__CheAlgo, 0, 0, 0},{0, 0, 0, 0}};
 static swig_cast_info _swigc__p_Angpow__CheFunc[] = {  {&_swigt__p_Angpow__CheFunc, 0, 0, 0},{0, 0, 0, 0}};
-static swig_cast_info _swigc__p_Angpow__ClassFunc1D[] = {  {&_swigt__p_Angpow__ClassFunc1D, 0, 0, 0},  {&_swigt__p_Angpow__Py_ClassFunc1D, _p_Angpow__Py_ClassFunc1DTo_p_Angpow__ClassFunc1D, 0, 0},{0, 0, 0, 0}};
-static swig_cast_info _swigc__p_Angpow__Py_ClassFunc1D[] = {  {&_swigt__p_Angpow__Py_ClassFunc1D, 0, 0, 0},{0, 0, 0, 0}};
+static swig_cast_info _swigc__p_Angpow__ClassFunc1D[] = {  {&_swigt__p_Angpow__ClassFunc1D_get_value, _p_Angpow__ClassFunc1D_get_valueTo_p_Angpow__ClassFunc1D, 0, 0},  {&_swigt__p_Angpow__ClassFunc1D, 0, 0, 0},{0, 0, 0, 0}};
+static swig_cast_info _swigc__p_Angpow__ClassFunc1D_get_value[] = {  {&_swigt__p_Angpow__ClassFunc1D_get_value, 0, 0, 0},{0, 0, 0, 0}};
 static swig_cast_info _swigc__p_allocator_type[] = {  {&_swigt__p_allocator_type, 0, 0, 0},{0, 0, 0, 0}};
 static swig_cast_info _swigc__p_char[] = {  {&_swigt__p_char, 0, 0, 0},{0, 0, 0, 0}};
 static swig_cast_info _swigc__p_const_reference[] = {  {&_swigt__p_const_reference, 0, 0, 0},{0, 0, 0, 0}};
@@ -10645,7 +10549,7 @@ static swig_cast_info *swig_cast_initial[] = {
   _swigc__p_Angpow__CheAlgo,
   _swigc__p_Angpow__CheFunc,
   _swigc__p_Angpow__ClassFunc1D,
-  _swigc__p_Angpow__Py_ClassFunc1D,
+  _swigc__p_Angpow__ClassFunc1D_get_value,
   _swigc__p_allocator_type,
   _swigc__p_char,
   _swigc__p_const_reference,
