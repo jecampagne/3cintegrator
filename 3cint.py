@@ -54,9 +54,18 @@ def test0():
   iOrd2 = chebyshev_order_2
   
   farr = Angpow.std_vector_CheFunc()
-  farr.push_back(Angpow.CheFunc(f1, iOrd1))
-  farr.push_back(Angpow.CheFunc(f2, iOrd2))
-  farr.push_back(Angpow.CheFunc(f0, iOrd0))
+  print("debug : add CheFunc : 000")
+  che_fun_0 = Angpow.CheFunc(f1, iOrd1)
+  farr.push_back(che_fun_0)
+
+  print("debug : add CheFunc : 001")
+  che_fun_1 = Angpow.CheFunc(f2, iOrd2)
+  farr.push_back(che_fun_1)
+
+  print("debug : add CheFunc : 002")
+  che_fun_2 = Angpow.CheFunc(f0, iOrd0)
+  farr.push_back(che_fun_2)
+  print("debug : add CheFunc : 003")
   
   # Initialisation of the Clenshow-Curtis quadrature
   cheAlgo = Angpow.CheAlgo(farr)
@@ -74,10 +83,10 @@ def test0():
       return
     
     # Loop on each function to compute their  Foward Chebyshev coefficents
-    print('debug 000')
+    print('debug : test0 : 000')
     for i in range(0,farr.size()):
       farr[i].ChebyshevTransform(lowBound, uppBound)
-    print('debug 001')
+    print('debug : test0 : 001')
 
     # Compute the sampling of all the functions in the final space dimension
     cheAlgo.InverseChebyshevTransform()
