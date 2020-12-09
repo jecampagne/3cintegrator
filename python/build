@@ -5,8 +5,15 @@
 /usr/local/SWIG/3.0.2/bin/swig -interface Angpow_swig_py -python -c++ -o ./Angpow_swig_py.icc ./Angpow.i
 
 Python_home=/opt/local/Library/Frameworks/Python.framework/Versions/2.7
+Python_inc="-I${Python_home}/include/python2.7"
 Python_lib="-L${Python_home}/lib -lpython2.7"
-py_exe="${Python_home}/bin/pythonw"
+py_exe="${Python_home}/bin/python"
+
+#Python_home=/opt/local/Library/Frameworks/Python.framework/Versions/3.6
+#Python_inc="-I${Python_home}/include/python3.6m"
+#Python_lib="-L${Python_home}/lib -lpython3.6"
+#py_exe="${Python_home}/bin/python3.6"
+
 echo "py_exe:"
 echo "${py_exe}"
 
@@ -14,7 +21,7 @@ echo "${py_exe}"
 #Python_lib="/usr/lib64/libpython2.7.so"
 
 #-fopenmp
-cppflags="-fPIC -I${Python_home}/include/python2.7 -I/opt/local/include -I.."
+cppflags="-fPIC ${Python_inc} -I/opt/local/include -I.."
 libs="${Python_lib} -L/opt/local/lib -lfftw3"
 
 g++ -c ${cppflags} -o ../Objs/Angpow_swig_py.o Angpow_swig_py.cc
