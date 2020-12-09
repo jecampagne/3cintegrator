@@ -9,15 +9,15 @@
 #Python_lib="-L${Python_home}/lib -lpython2.7"
 #py_exe="${Python_home}/bin/python"
 
-#Python_home=/opt/local/Library/Frameworks/Python.framework/Versions/3.6
-#Python_inc="-I${Python_home}/include/python3.6m"
-#Python_lib="-L${Python_home}/lib -lpython3.6"
-#py_exe="${Python_home}/bin/python3.6"
+Python_home=/opt/local/Library/Frameworks/Python.framework/Versions/3.6
+Python_inc="-I${Python_home}/include/python3.6m"
+Python_lib="-L${Python_home}/lib -lpython3.6"
+py_exe="${Python_home}/bin/python3.6"
 
-Python_home=/opt/local/Library/Frameworks/Python.framework/Versions/3.8
-Python_inc="-I${Python_home}/include/python3.8"
-Python_lib="-L${Python_home}/lib -lpython3.8"
-py_exe="${Python_home}/bin/python3.8"
+#Python_home=/opt/local/Library/Frameworks/Python.framework/Versions/3.8
+#Python_inc="-I${Python_home}/include/python3.8"
+#Python_lib="-L${Python_home}/lib -lpython3.8"
+#py_exe="${Python_home}/bin/python3.8"
 
 echo "py_exe:"
 echo "${py_exe}"
