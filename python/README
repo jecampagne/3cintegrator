@@ -7,6 +7,7 @@
 
   sh> make
   sh> cd python
+  sh> <If necessary, edit ./build to customize swig and Python accesses>
   sh> ./build
   sh> export PYTHONPATH=../lib
   sh> <python_exe> -i 3cint.py
