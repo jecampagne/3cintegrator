@@ -10,10 +10,10 @@ import math
 class FuncType1(Angpow.ClassFunc1D_get_value):
   m_ell = 0
   m_R = 0
-  #def __init__(self,a_ell,a_R):
-  #  #Angpow.ClassFunc1D()
-  #  self.m_ell = a_ell
-  #  self.m_R = a_R
+  def __init__(self,a_ell,a_R):
+    Angpow.ClassFunc1D_get_value.__init__(self)
+    self.m_ell = a_ell
+    self.m_R = a_R
   def get_value(self,a_x):
     return math.cos(a_x*self.m_R - self.m_ell*math.pi*0.5 - math.pi*0.25)
 
@@ -35,16 +35,8 @@ def test0():
   for i in range(0,n_sub_intervals+1):
     klp[i] = kMin + dK * i/n_sub_intervals
 
-  #f1 = FuncType1(ell,R1)
-  f1 = FuncType1()
-  f1.m_ell = ell
-  f1.m_R = R1
-  
-  #f2 = FuncType1(ell,R2)
-  f2 = FuncType1()
-  f2.m_ell = ell
-  f2.m_R = R2
-
+  f1 = FuncType1(ell,R1)
+  f2 = FuncType1(ell,R2)
   f0 = FuncType0()
   
   iOrd0 = 2
