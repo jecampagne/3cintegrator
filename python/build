@@ -1,6 +1,6 @@
 #!/bin/sh -f
 
-/usr/local/SWIG/3.0.2/bin/swig -interface Angpow_swig_py -python -c++ -o ./Angpow_swig_py.icc ../swig/Angpow_swig.i
+/usr/local/SWIG/3.0.2/bin/swig -interface Angpow_swig_py -python -c++ -o ./Angpow_swig_py.icc ./Angpow_swig.i
 
 Python_home=/opt/local/Library/Frameworks/Python.framework/Versions/2.7
 Python_lib="-L${Python_home}/lib -lpython2.7"
