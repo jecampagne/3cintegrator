@@ -25,7 +25,7 @@ def test0():
   chebyshev_order_2 =  chebyshev_order_1
   n_sub_intervals = 5
 
-  print "ell=",ell," , Nintervales=",n_sub_intervals
+  print("ell=",ell," , Nintervales=",n_sub_intervals)
   
   # k-integral bounds
   kMin = 0.
@@ -65,7 +65,7 @@ def test0():
     uppBound = klp[p]
     
     if lowBound > uppBound:
-      print 'KIntegrator::Compute uppBound < lowBound Fatal'
+      print('KIntegrator::Compute uppBound < lowBound Fatal')
       return
     
     # Loop on each function to compute their  Foward Chebyshev coefficents
@@ -78,6 +78,6 @@ def test0():
     # Compute the integral thanks to CC quadrature and the function sampling 
     integral += (uppBound - lowBound) * cheAlgo.ComputeIntegralUnscaled()
     
-  print "Approx. Integ = ",integral
+  print("Approx. Integ = ",integral)
 
 test0()
