@@ -2,7 +2,10 @@
 
 #set -x
 
-/usr/local/SWIG/3.0.2/bin/swig -interface Angpow_swig_py -python -c++ -o ./Angpow_swig_py.icc ./Angpow.i
+#swig_exe=/usr/local/SWIG/3.0.2/bin/swig
+swig_exe=/usr/local/SWIG/4.0.2/bin/swig
+
+${swig_exe} -interface Angpow_swig_py -python -c++ -o ./Angpow_swig_py.icc ./Angpow.i
 
 #Python_home=/opt/local/Library/Frameworks/Python.framework/Versions/2.7
 #Python_inc="-I${Python_home}/include/python2.7"
