@@ -25,7 +25,7 @@ py_exe="${Python_home}/bin/python3.6"
 echo "py_exe:"
 echo "${py_exe}"
 
-Python_home=/usr
+#Python_home=/usr
 #Python_inc="-I${Python_home}/include/python2.7"
 #Python_lib="/usr/lib64/libpython2.7.so"
 #cppflags="-fopenmp"
