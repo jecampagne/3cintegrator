@@ -10,7 +10,7 @@ CC = gcc
 CFLAGS = -Wall -Wpointer-arith -Wmissing-prototypes -O  -fPIC 
 #  Def compilateur C++ et flags
 #CXX =  $(GCCDIR)g++
-CXX =  c++
+CXX =  g++
 #  Flag de warning -Wsynth NON inclus par defaut (04/2007)
 CXXFLAGS = -Wall -Wpointer-arith -O3 -fPIC -std=c++11 -fopenmp  -fno-common  -Wall -march=native -ffast-math -m64
 # flags specifiques pour templates repository...
